@@ -50,6 +50,7 @@
     <!--DTR Function-->
   <script>
     $(document).ready(function() {
+        $.fn.dataTableExt.sErrMode = 'throw'
          var date = new Date();
          var n_j_y = date.getMonth()+1+"_"+date.getDate()+"_"+date.getFullYear();
         {% for timeout in timeOutList%}
