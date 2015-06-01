@@ -1,4 +1,7 @@
 *.pyc
 *.swp
 venv/
+apps/login/migrations/
+apps/register/migrations/
+apps/user_logs/migrations/
 
