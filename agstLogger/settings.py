@@ -37,6 +37,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'apps.register',
+    'apps.login',
+    'apps.user_logs',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -78,10 +81,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'agstlogger',
-	'USER': 'postgres',
-	'PASSWORD': 'agstSERVER',
-	'HOST': '127.0.0.1',
-	'PORT' : '5432'
+        'USER': 'postgres',
+        'PASSWORD': 'agstSERVER',
+        'HOST': '10.33.88.101',
+        'PORT': '5432'
     }
 }
 

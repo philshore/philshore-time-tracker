@@ -1,0 +1,62 @@
+{% extends "base/base_login_register.html" %}
+{% load staticfiles %}
+{% block content %}
+<!--Login css-->
+<link href="{% static "accounts/css/login.css"  %}" rel="stylesheet">
+<div id="container_reg" class="container-fluid">
+  <div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-lg-offset-4 col-md-offset-4 col-sm-offset-4 mtop_10em">
+      <div class="panel panel-info shadow" id="panelRegister">
+        <div class="panel-heading">
+          <div class="panel-title"><h1>&nbsp;Log in</h1></div>
+        </div>
+        <div class="panel-body">
+          <div class="col-lg-12 col-md-12 col-sm-12">
+                {% if invalid %}
+                    <h5 class="error" id="error_username">{{message}}</h5> 
+                    <h5 class="logout">{{outMessage}}</h5> 
+                {% endif %}
+                <form id="login_form" method="post" action="/login/">
+                {% csrf_token %}
+                <div class="form-group">
+                  <div class="col-lg-6 col-md-6 col-sm-6" >
+                     <p id="p_username">
+                        <label for="id_username">Username:</label>
+                        <input id="id_username" maxlength="30" name="username" placeholder="Username" type="text" class="form-control" required/> <span class="helptext"></span>
+                    </p> 
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-6" >
+                    <p id="p_password">
+                        <label for="id_password">Password:</label>
+                        <input id="id_password" name="password" type="password" class="form-control" placeholder="Must be 8 characters" required />
+                    </p>                    
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-6" id="login_left" >
+                    <div id="log_btn_div">
+                      <button id="login_btn" type="" value="Log in" class="btn btn-success btn_width" click="">Log in</button>
+                    </div><!--button inside panel-->
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-6" id="login_right" >
+                    <h4 class="pull-left" ><a href="/login/reset/" >Forgot your password?</a></h4>
+                  </div>
+                </div><!--form-group-->
+              </form>
+          </div><!--/col-lg-12-->
+          <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-2" style="display:none;">
+             <div class="col-lg-9 col-md-9 col-sm-9" id="login_logo_text">
+                <h4 class="pull-right">Tidal Current Energy Integrated Resource</h4>
+                <h4 class="pull-right">Assessment and Spatial Planning Tool</h4>
+                <h5 class="pull-right">Philippine Sites for Harnessing Ocean Renewable Energy</h5>
+              </div>
+              <div class="col-lg-3 col-md-3 col-sm-3 pull-left" id="login_logo_logo">
+                <!-- <img class="logo_size img-responsive" src="{% static "tidalWebgis/img/PhilSHORE Logo.png"  %}"  alt="philshore logo" style="display:none;"> -->
+              </div>
+          </div>
+      </div><!--/panel-body-->
+
+    </div><!--/panel-->
+      <img src="{% static "accounts/img/logos.png"  %}" class="img-responsive" alt="Collaborating Agencies."  style="display:none;">
+    </div><!--/col-lg-4 offset-4-->
+  </div> <!--/row-->
+</div><!--/container-->
+{% endblock %}

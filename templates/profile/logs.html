@@ -1,0 +1,88 @@
+{% extends "base/base_profile.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+<!--edited-->
+   <!--DataTables-->
+    <link href="http://cdn.datatables.net/1.10.7/css/jquery.dataTables.css" rel="stylesheet">
+<script type="text/javascript" src="{% static "base/js/jquery.dataTables.min.js"  %}"></script>
+<script type="text/javascript" src="{% static "base/js/dataTables.bootstrap.js"  %}"></script>
+  <div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="col-lg-6">
+                <h3>You're logged in as {{user.username}}.</h3>
+            </div>
+            <div class="col-lg-6">
+                <div class="col-lg-4 pull-right">
+                    <button class="btn btn-primary disabled btn-block" style="margin-top:1.15em;" id="logOut">Time Out</button> 
+                </div>
+
+                <div class="col-lg-4 pull-right">
+                    <button class="btn btn-warning btn-block" style="margin-top:1.15em;" id="logIn" >Time In</button>             
+                </div>
+            </div>
+            <div class="col-lg-10 col-lg-offset-1">
+            <table class="table" id="example">
+                <thead>
+                    <th>Date</th>
+                    <th>Time In</th>
+                    <th>Time Out</th>
+                </thead>
+                <tbody>
+                {% for timein in timeInList %}
+                    <tr id="{{ timein.dateIn|date:'n_j_Y' }}"> 
+                        <td>{{ timein.dateIn }}</td>
+                        <td>{{ timein.timeIn|date:"f:s" }}</td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+            </div>      
+        </div>
+    </div>
+  </div>
+
+
+    <!--DTR Function-->
+  <script>
+    $(document).ready(function() {
+         var date = new Date();
+         var n_j_y = date.getMonth()+1+"_"+date.getDate()+"_"+date.getFullYear();
+        {% for timeout in timeOutList%}
+            var idOfDataTimeout = "{{ timeout.dateOut|date:'n_j_Y' }}_out";
+            $("#{{ timeout.dateOut|date:'n_j_Y' }}").append("<td id="+idOfDataTimeout+">{{timeout.timeOut|date:'f:s'}}</td>");
+        {% endfor %}
+
+        if($("#"+n_j_y).length==1){
+            $("#logIn").addClass("disabled");
+            $("#logOut").removeClass("disabled");
+        }
+        if($("#"+n_j_y+"_out").length==1){
+            $("#logIn").addClass("disabled");
+            $("#logOut").addClass("disabled");
+        }
+
+
+     $('#example').dataTable();
+
+        $("#logIn").on("click",function(){
+            location.href="/profile/timein"
+
+        });
+        $("#logOut").on("click",function(){
+            location.href="/profile/timeout"
+
+
+        });
+       
+    });
+
+</script>
+  </body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,182 @@
+/*fonts used*/
+@font-face { font-family: 'Geo Sans Light'; src: url('../fonts/text_fonts/geo_sans_light.eot'); 
+            src: url('../fonts/text_fonts/geo_sans_light.eot?#iefix') format('embedded-opentype'), 
+            url('../fonts/text_fonts/geo_sans_light.svg#Geo Sans Light') format('svg'), 
+            url('../fonts/text_fonts/geo_sans_light.woff') format('woff'), 
+            url('../fonts/text_fonts/geo_sans_light.ttf') format('truetype'); 
+            font-weight: normal; font-style: normal;}
+/*fonts used*/
+
+/*Body styles*/
+body{
+  font-family:'Geo Sans Light';
+  font-size:16px;
+}
+.mtop_10em{
+  margin-top:10em;
+}
+.ptopleft_10em{
+  padding-top:10em;
+  padding-left:3em;
+}
+.mleft_5em{
+  margin-left:3em;
+}
+/*Body styles*/
+
+/*panel*/
+#panelRegister, .panel{
+  border:none;
+  margin-bottom: 0em;
+}
+.shadow{
+  -moz-box-shadow:    1px 1px 2px 2px rgba(33, 33, 33, 0.25);
+  -webkit-box-shadow: 1px 1px 2px 2px rgba(33, 33, 33, 0.25);
+  box-shadow:         1px 1px 2px 2px rgba(33, 33, 33, 0.25);
+}
+/*panel*/
+
+/*panel heading*/
+.logo_size{
+  height:6em;
+  width:auto;
+}
+.panel-info > .panel-heading{
+  color: #FFF;
+  background-color: rgba(3,0,52,1); 
+}
+.panel-heading{
+  padding: 0px 15px;
+}
+.panel-heading h1{
+  margin:0px;
+}
+.panel-title{
+  padding:3%;
+}
+/*panel heading*/
+
+/*Login Panel Button*/
+.btn_width{
+  width:100%;
+  font-size:1em;
+  padding: 0.15em 1em;
+}
+#log_btn_div{
+  margin-top:5%;
+}
+/*Login Panel Button*/
+
+/*error class in panel*/
+.error{
+  color:rgba(255, 77, 77, 0.88);
+}
+.has-error .form-control {
+  border-color: rgba(239, 79, 76, 0.66);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.075) inset;
+}
+/*error class in panel*/
+
+/* logout message*/
+.logout{
+    color: rgba(8, 92, 38, 1);
+}
+/* logout message*/
+
+/*Register Page Main Background*/
+#container_reg{ 
+  background: url(../img/reg_bg.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index:1;
+}
+/*Register Page Main Background*/
+
+/*For things to float on top of bg*/
+.ontop{
+  position: relative;
+  z-index:2;
+}
+/*For things to float on top of bg*/
+
+/*general nav styles*/
+.navbar{
+  background-color: rgba(0,0,0,0.65);
+  border-color: transparent;
+}
+li{
+  color:white;
+}
+/*general nav styles*/
+
+/*footer nav*/
+.reg_footer{
+  bottom:0;
+}
+#footer_content{
+  margin:1% auto;
+  width:45%;
+}
+
+#footer_content a{
+  text-decoration: none;
+  color:#fff;
+}
+#footer_content a:hover{
+  color:#6B6B6B;
+}
+/*footer nav*/
+
+/*forgot your pass styles*/
+#login_right h4{
+  color:#000E3E;
+  margin-top:7% !important;
+}
+
+#login_right a{
+  color:#000E3E;
+  text-decoration: none;
+}
+
+#login_right a:hover{
+  color:#797B80;
+
+}
+/*forgot your pass styles*/
+
+/*login bottom name+logo*/
+#login_logo_text h4{
+  font-size:1em;
+  margin: 0.15em .25em;
+}
+
+#login_logo_text{
+  margin-top:1.15em;
+  padding-right:0em;
+}
+
+#login_logo_text h5{
+  font-size:0.85em;
+  margin-top:0.15em;
+}
+
+#login_logo_logo{
+  padding-left:0em;
+  padding-right:0em;
+  width: 22%;
+  margin-left: 1%;
+}
+/*login bottom name+logo*/
+
+#login_right h4{
+  font-size: 1em;
+} 
