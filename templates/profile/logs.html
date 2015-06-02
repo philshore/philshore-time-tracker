@@ -37,7 +37,7 @@
                     <tr id="{{ timein.dateIn|date:'n_j_Y' }}"> 
                         <td >{{ timein.dateIn }}</td>
                         <td >{{ timein.dateIn|date:"l" }}</td>
-                        <td id="{{ timein.dateIn|date:'n_j_Y' }}_in">{{ timein.timeIn|date:"f:s" }}</td>
+                        <td id="{{ timein.dateIn|date:'n_j_Y' }}_in">{{ timein.timeIn|date:"f:s A" }}</td>
                     </tr>
                 {% endfor %}
 
@@ -68,7 +68,6 @@
             var idOfDataTimeout = "{{ timeout.dateOut|date:'n_j_Y' }}_out";
             var timein = $("#{{ timeout.dateOut|date:'n_j_Y' }}_in").text();
             var duration = {{ timein|timesince:timeout }}
-            console.log("Yolo"+timein);
             $("#{{ timeout.dateOut|date:'n_j_Y' }}").append("<td id="+idOfDataTimeout+">{{timeout.timeOut|date:'f:s'}}</td><td>"+duration+"</td>");
         {% endfor %}
 
