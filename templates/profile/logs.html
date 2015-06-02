@@ -68,7 +68,7 @@
             var idOfDataTimeout = "{{ timeout.dateOut|date:'n_j_Y' }}_out";
             var timein = $("#{{ timeout.dateOut|date:'n_j_Y' }}_in").text();
             var duration = {{ timein|timesince:timeout }}
-            $("#{{ timeout.dateOut|date:'n_j_Y' }}").append("<td id="+idOfDataTimeout+">{{timeout.timeOut|date:'f:s'}}</td><td>"+duration+"</td>");
+            $("#{{ timeout.dateOut|date:'n_j_Y' }}").append("<td id="+idOfDataTimeout+">{{timeout.timeOut|date:'f:s A'}}</td><td>"+duration+"</td>");
         {% endfor %}
 
         if($("#"+n_j_y).length==1){
