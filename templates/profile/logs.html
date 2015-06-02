@@ -15,7 +15,7 @@
             <div class="col-lg-6">
             <h3>You're logged in as {{user.username}}.</h3>
             {% if user.is_staff %}    
-                <h4>{{client.first_name}} Logs </h4>
+                <h4>{{client.first_name|upper}} Logs </h4>
             {% endif %}
             </div>
             <div class="col-lg-6">
