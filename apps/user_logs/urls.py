@@ -7,4 +7,8 @@ urlpatterns = patterns('',
                            name='timein'),
                        url(r'^timeout/$', views.record_timeout,
                            name='timeout'),
+                       url(r'^dashboard/$', views.admin_dashboard,
+                           name='dashboard'),
+                       url(r'^admin_logs/$', views.admin_logs,
+                           name='admin logs'),
                        )

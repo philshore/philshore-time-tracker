@@ -13,44 +13,47 @@ def user_login(request):
     """
     page_title = "Login"
     # Check if user is logged in
-    if request.user.is_active:
-        # Redirect to user profile page
-        return redirect('/profile/')
-    # If user is not logged in !
+    if request.user.is_staff:
+        return redirect('/dashboard/')
     else:
-        # Login Button is clicked
-        if request.method == 'POST':
-            # Get user name and password from login form
-            username = request.POST.get('username')
-            password = request.POST.get('password')
-            # Check if user is valid
-            try:
-                user = authenticate(username=username, password=password)
-                # If user is activated
-                if user.is_active:
-                    # Login the user
-                    login(request, user)
-                    # Render the user profile page
-                    return redirect('/profile/')
-                # If user is not activated
-                elif user.is_active is False:
-                    # Display account deactivated as flash message
-                    message = "Account Deactivated"
+        if request.user.is_active:
+            # Redirect to user profile page
+            return redirect('/profile/')
+        # If user is not logged in !
+        else:
+            # Login Button is clicked
+            if request.method == 'POST':
+                # Get user name and password from login form
+                username = request.POST.get('username')
+                password = request.POST.get('password')
+                # Check if user is valid
+                try:
+                    user = authenticate(username=username, password=password)
+                    # If user is activated
+                    if user.is_active:
+                        # Login the user
+                        login(request, user)
+                        # Render the user profile page
+                        return redirect('/profile/')
+                    # If user is not activated
+                    elif user.is_active is False:
+                        # Display account deactivated as flash message
+                        message = "Account Deactivated"
+                        return render(request, 'login/login.html', {
+                            'page_title': page_title,
+                            'message': message, 'invalid': True})
+                # if user is not valid
+                except:
+                    # Display invalid credentials as flash message
+                    loginMessage = 'Invalid Username or Password'
                     return render(request, 'login/login.html', {
                         'page_title': page_title,
-                        'message': message, 'invalid': True})
-            # if user is not valid
-            except:
-                # Display invalid credentials as flash message
-                loginMessage = 'Invalid Username or Password'
+                        'message': loginMessage, 'invalid': True})
+            else:
+                # Render login.html for initial request of the page
                 return render(request, 'login/login.html', {
                     'page_title': page_title,
-                    'message': loginMessage, 'invalid': True})
-        else:
-            # Render login.html for initial request of the page
-            return render(request, 'login/login.html', {
-                'page_title': page_title,
-            })
+                })
 
 
 # Logout Module

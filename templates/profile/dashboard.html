@@ -1,0 +1,102 @@
+{% extends "base/base_profile.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+<style>
+    .navbar-inverse .navbar-brand{
+        color:#fff;
+    }
+    #dash_logo{
+        height:5em;
+        width:auto;
+        /*margin-right:0em;*/
+    }
+    .container-fluid{
+        /*height:5em;*/
+    }
+    .navbar-header{
+       /* margin-bottom:2em;*/
+    }
+    .white{
+        color: #FFF;
+        /*margin-left: 0.25em;*/
+        width: 20em;
+        margin-top: 1em;
+    }
+    .nav_admin{
+        margin-top:1em;
+        margin-right:0.5em;
+    }
+    .btn-circle.btn-xl {
+      width: 8em;
+      height: 7em;
+      padding: 10px 16px;
+      font-size: 24px;
+      line-height: 1.33;
+      border-radius: 0em;
+    }
+    .btn-top{
+        margin-top:2em;
+    }
+    #dash_row{
+        margin-top:3em;
+    }
+    .out{
+        background-color: #B4B0B0;
+        border-color: #B0B0B0;
+    }
+    .out:hover{
+        background-color: #636363;
+    }
+</style>
+
+<!-- Main -->
+<div class="container-fluid">
+    <div class="row" id="dash_row">
+        <!-- /col-3 -->
+        <div class="col-lg-8 col-lg-offset-2">
+            <strong><h1>Welcome, Admin!</h1></strong>
+                <div class="col-lg-8 col-lg-offset-2 btn-top">
+                <center>
+                    <div class="col-lg-3">
+                        <button class="btn btn-success btn-circle btn-xl"> ian</button>
+                    </div>
+                    <div class="col-lg-3">
+                        <button class="btn btn-success btn-circle btn-xl"> mike</button>
+                    </div>
+                    <div class="col-lg-3">
+                        <button class="btn btn-success btn-circle btn-xl"> toots</button>
+                    </div>
+                    <div class="col-lg-3">
+                        <button class="btn btn-success btn-circle btn-xl"> cham</button>
+                    </div>
+                </center>
+                </div>
+                <div class="col-lg-8 col-lg-offset-2 btn-top">
+                <center>
+                    <div class="col-lg-3">
+                        <button class="btn btn-success btn-circle btn-xl"> maan</button>
+                    </div>
+                    <div class="col-lg-3">
+                        <button class="btn btn-success btn-circle btn-xl out"> justine</button>
+                    </div>
+                    <div class="col-lg-3">
+                        <button class="btn btn-success btn-circle btn-xl"> oliver</button>
+                    </div>
+                    <div class="col-lg-3">
+                        <button class="btn btn-success btn-circle btn-xl">
+                            <span>
+                                <img id="dash_logo" src="img/PhilSHORE Logo.png"/>
+                            </span>
+                        </button>
+                    </div>
+                </center>
+                </div>
+        </div>
+        <!--/col-span-9-->
+    </div>
+</div>
+
+
+{% endblock %}
