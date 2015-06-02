@@ -49,9 +49,12 @@ def record_timeout(request):
 def admin_dashboard(request):
     page_title = "Admin Dashboard"
     users = User.objects.all().exclude(id=request.user.id)
+    dateToday = strftime("%Y-%m-%d")
+    timeInListToday = TimeIn.objects.filter(dateIn=dateToday)
     return render(request, 'profile/dashboard.html',
                   {'page_title': page_title,
                    'users': users,
+                   'timeInList': timeInListToday,
                    })
 
 

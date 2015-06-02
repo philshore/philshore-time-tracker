@@ -42,6 +42,7 @@
     #dash_row{
         margin-top:3em;
     }
+
     .out{
         background-color: #B4B0B0;
         border-color: #B0B0B0;
@@ -60,32 +61,32 @@
                 <div class="col-lg-8 col-lg-offset-2 btn-top">
                 <center>
                     <div class="col-lg-3">
-                        <button class="btn btn-success btn-circle btn-xl"> ian</button>
+                        <button id="1" class="btn out btn-circle btn-xl"> ian</button>
                     </div>
                     <div class="col-lg-3">
-                        <button class="btn btn-success btn-circle btn-xl"> mike</button>
+                        <button id="4" class="btn out btn-circle btn-xl"> mike</button>
                     </div>
                     <div class="col-lg-3">
-                        <button class="btn btn-success btn-circle btn-xl"> toots</button>
+                        <button id="3" class="btn out btn-circle btn-xl"> toots</button>
                     </div>
                     <div class="col-lg-3">
-                        <button class="btn btn-success btn-circle btn-xl"> cham</button>
+                        <button id="2" class="btn out btn-circle btn-xl"> cham</button>
                     </div>
                 </center>
                 </div>
                 <div class="col-lg-8 col-lg-offset-2 btn-top">
                 <center>
                     <div class="col-lg-3">
-                        <button class="btn btn-success btn-circle btn-xl"> maan</button>
+                        <button class="btn out btn-circle btn-xl"> maan</button>
                     </div>
                     <div class="col-lg-3">
-                        <button class="btn btn-success btn-circle btn-xl out"> justine</button>
+                        <button class="btn out btn-circle btn-xl out"> justine</button>
                     </div>
                     <div class="col-lg-3">
-                        <button class="btn btn-success btn-circle btn-xl"> oliver</button>
+                        <button class="btn out btn-circle btn-xl"> oliver</button>
                     </div>
                     <div class="col-lg-3">
-                        <button class="btn btn-success btn-circle btn-xl">
+                        <button class="btn out btn-circle btn-xl">
                             <span>
                                 <img id="dash_logo" src="{% static "base/img/PhilSHORE Logo.png"  %}"/>
                             </span>
@@ -98,5 +99,11 @@
     </div>
 </div>
 
+<script>
+    {% for timein in timeInList%}
+        $("#{{timein.userId}}").removeClass("out");
+        $("#{{timein.userId}}").addClass("btn-success");
+    {% endfor %}
+</script>
 
 {% endblock %}
