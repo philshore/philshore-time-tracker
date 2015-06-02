@@ -30,13 +30,14 @@
                     <th>Day</th>
                     <th>Time In</th>
                     <th>Time Out</th>
+                    <th>Duration</th>
                 </thead>
                 <tbody>
                 {% for timein in timeInList %}
                     <tr id="{{ timein.dateIn|date:'n_j_Y' }}"> 
-                        <td>{{ timein.dateIn }}</td>
-                        <td>{{ timein.dateIn|date:"l" }}</td>
-                        <td>{{ timein.timeIn|date:"f:s" }}</td>
+                        <td >{{ timein.dateIn }}</td>
+                        <td >{{ timein.dateIn|date:"l" }}</td>
+                        <td id="{{ timein.dateIn|date:'n_j_Y' }}_in">{{ timein.timeIn|date:"f:s" }}</td>
                     </tr>
                 {% endfor %}
 
@@ -65,7 +66,9 @@
          var n_j_y = date.getMonth()+1+"_"+date.getDate()+"_"+date.getFullYear();
         {% for timeout in timeOutList%}
             var idOfDataTimeout = "{{ timeout.dateOut|date:'n_j_Y' }}_out";
-            $("#{{ timeout.dateOut|date:'n_j_Y' }}").append("<td id="+idOfDataTimeout+">{{timeout.timeOut|date:'f:s'}}</td>");
+            var timein = $("#{{ timeout.dateOut|date:'n_j_Y' }}_in").val();
+            var duration = {{ timein|timesince:timeout }}
+            $("#{{ timeout.dateOut|date:'n_j_Y' }}").append("<td id="+idOfDataTimeout+">{{timeout.timeOut|date:'f:s'}}</td><td>"+duration+"</td>");
         {% endfor %}
 
         if($("#"+n_j_y).length==1){
