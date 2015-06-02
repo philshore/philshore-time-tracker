@@ -62,6 +62,7 @@ def admin_dashboard(request):
 def admin_logs(request, user_id):
     page_title = "Admin Logs"
     user = request.user
+    client = User.objects.get(id=user_id)
     timeInlist = TimeIn.objects.filter(userId=user_id)
     timeOutlist = TimeOut.objects.filter(userId=user_id)
     return render(request, 'profile/logs.html',
@@ -69,4 +70,5 @@ def admin_logs(request, user_id):
                    'user': user,
                    'timeInList': timeInlist,
                    'timeOutList': timeOutlist,
+                   'client': client,
                    })
