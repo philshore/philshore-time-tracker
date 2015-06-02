@@ -67,7 +67,7 @@
         {% for timeout in timeOutList%}
             var idOfDataTimeout = "{{ timeout.dateOut|date:'n_j_Y' }}_out";
             var timein = $("#{{ timeout.dateOut|date:'n_j_Y' }}_in").text();
-            var duration = Date.parse({{ timein|timesince:timeout }})
+            var duration = new Date(timein)
             console.log(duration)
             $("#{{ timeout.dateOut|date:'n_j_Y' }}").append("<td id="+idOfDataTimeout+">{{timeout.timeOut|date:'f:s A'}}</td><td>"+duration+"</td>");
         {% endfor %}
