@@ -16,7 +16,7 @@
             </div>
             <div class="col-lg-6">
                 <div class="col-lg-4 pull-right">
-                    <button class="btn btn-primary disabled btn-block" style="margin-top:1.15em;" id="logOut">Time Out</button> 
+                    <button class="btn btn-primary disabled btn-block" style="margin-top:1.15em;" id="logOut_modal">Time Out</button> 
                 </div>
 
                 <div class="col-lg-4 pull-right">
@@ -98,6 +98,11 @@
 
         });
        
+        $("#logOut_modal").on("click",function(){
+            $("#timeoutModal").show();
+
+
+        });
     });
 
 </script>
