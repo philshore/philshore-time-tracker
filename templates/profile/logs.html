@@ -68,11 +68,11 @@
             var idOfDataTimeout = "{{ timeout.dateOut|date:'n_j_Y' }}_out";
             var timein = $("#{{ timeout.dateOut|date:'n_j_Y' }}_in").text();
             var durationIn = new Date("{{ timeout.dateOut}} "+ timein);
-            console.log(durationIn.getMinutes())
+            //console.log(durationIn.getMinutes())
             var durationOut = new Date("{{ timeout.dateOut}} {{timeout.timeOut|date:'f:s A'}}");
-            console.log(durationOut.getMinutes())
+            //console.log(durationOut.getMinutes())
             var duration = ((durationOut.getSeconds()/ 3600)+(durationOut.getMinutes()/ 60) + durationOut.getHours())-((durationIn.getSeconds()/ 3600)+(durationIn.getMinutes()/ 60) + durationIn.getHours()) 
-            console.log(duration);
+            //console.log(duration);
             $("#{{ timeout.dateOut|date:'n_j_Y' }}").append("<td id="+idOfDataTimeout+">{{timeout.timeOut|date:'f:s A'}}</td><td>"+duration.toFixed(3)+" Hours </td>");
         {% endfor %}
 
