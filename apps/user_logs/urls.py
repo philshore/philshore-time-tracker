@@ -9,6 +9,7 @@ urlpatterns = patterns('',
                            name='timeout'),
                        url(r'^dashboard/$', views.admin_dashboard,
                            name='dashboard'),
-                       url(r'^admin_logs/$', views.admin_logs,
+                       url(r'^admin_logs/(?P<user_id>(\d+))/$',
+                           views.admin_logs,
                            name='admin logs'),
                        )
