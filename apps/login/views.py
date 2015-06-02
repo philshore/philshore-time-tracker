@@ -33,8 +33,11 @@ def user_login(request):
                     if user.is_active:
                         # Login the user
                         login(request, user)
+                        if user.is_staff:
+                            return redirect('/dashboard/')
                         # Render the user profile page
-                        return redirect('/profile/')
+                        else:
+                            return redirect('/profile/')
                     # If user is not activated
                     elif user.is_active is False:
                         # Display account deactivated as flash message
