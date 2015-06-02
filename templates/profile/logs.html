@@ -69,7 +69,7 @@
             var timein = $("#{{ timeout.dateOut|date:'n_j_Y' }}_in").text();
             var durationIn = new Date("{{ timeout.dateOut}} "+ timein);
             console.log(durationIn)
-            var durationOut = new Date("{{ timeout.dateOut}} {{timeout.timeOut|date:'f:s'}}");
+            var durationOut = new Date("{{ timeout.dateOut}} {{timeout.timeOut|date:'f:s A'}}");
             console.log(durationOut)
             var duration = ((durationOut.getMinutes()/ 60) + durationOut.getHours())-((durationIn.getMinutes()/ 60) + durationIn.getHours()) 
             console.log(duration);
