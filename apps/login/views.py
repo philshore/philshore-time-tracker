@@ -34,7 +34,7 @@ def user_login(request):
                         # Login the user
                         login(request, user)
                         if user.is_staff:
-                            return redirect('profile/dashboard/')
+                            return redirect('/profile/dashboard/')
                         # Render the user profile page
                         else:
                             return redirect('/profile/')
