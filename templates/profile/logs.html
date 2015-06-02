@@ -50,7 +50,15 @@
     <!--DTR Function-->
   <script>
     $(document).ready(function() {
-        $.fn.dataTableExt.sErrMode = 'throw'
+        window.alert = (function() {
+            var nativeAlert = window.alert;
+            return function(message) {
+                window.alert = nativeAlert;
+                message.indexOf("DataTables warning") === 0 ?
+                    console.warn(message) :
+                    nativeAlert(message);
+            }
+        })();
          var date = new Date();
          var n_j_y = date.getMonth()+1+"_"+date.getDate()+"_"+date.getFullYear();
         {% for timeout in timeOutList%}
