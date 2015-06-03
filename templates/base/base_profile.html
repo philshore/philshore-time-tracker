@@ -41,6 +41,13 @@
         #example_wrapper{
           margin-top:2em;
         }
+        .modal{
+          top:12em;
+        }
+        .modal-content{
+          background: rgb(83,83,83);
+          color: white;
+        }
     </style>
 	<body>
 <!-- header -->
@@ -83,8 +90,8 @@
             <div class="modal-header">
             </div>
             <div class="modal-body"> 
-                Are you sure you want to timeout? 
-                 <button class="btn btn-primary btn-block" style="margin-top:1.15em;" id="logOut">Time Out</button> 
+                <h3>Are you sure you want to timeout?</h3> 
+                 <button class="btn btn-primary" style="margin-top:1.15em;" id="logOut">Time Out</button> 
             </div>
             <div class="modal-footer">
                 <button data-dismiss="modal" class="btn btn-success" id="cancel">Cancel</button>
