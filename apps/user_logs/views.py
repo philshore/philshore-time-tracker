@@ -91,10 +91,12 @@ def ValuesQuerySetToDict(vqs, vqs2):
     Joins two data models [User, UserProfile]
     """
     userdata = {"user": []}
-    for item, item2 in zip(vqs, vqs2):
-        temp = {}
-        temp["id"] = str(item["id"])
-        temp["first_name"] = item["first_name"]
-        temp["component"] = item2["component"]
-        userdata['user'].append(temp)
+    for item in vqs:
+        for item2 in vqs2:
+            if(item["id"] == item2["user_id"]):
+                temp = {}
+                temp["id"] = str(item["id"])
+                temp["first_name"] = item["first_name"]
+                temp["component"] = item2["component"]
+                userdata['user'].append(temp)
     return userdata
