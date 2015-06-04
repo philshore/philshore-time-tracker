@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import User
+from apps.register.models import UserComponent
 from apps.user_logs.models import TimeIn, TimeOut
 from time import strftime
 
@@ -48,7 +49,11 @@ def record_timeout(request):
 @user_passes_test(lambda u: u.is_staff, login_url='/profile/')
 def admin_dashboard(request):
     page_title = "Admin Dashboard"
-    users = User.objects.all().exclude(id=request.user.id)
+    users = User.objects.all().exclude(id=request.user.id).values(
+            'id', 'first_name')
+    component = UserComponent.objects.all().exclude(user_id=request.user.id).values(
+            'user_id', 'component')
+    data_dict = ValuesQuerySetToDict(users, component)
     dateToday = strftime("%Y-%m-%d")
     timeInListToday = TimeIn.objects.filter(dateIn=dateToday)
     admin = User.objects.get(id=request.user.id)
@@ -57,6 +62,7 @@ def admin_dashboard(request):
                    'users': users,
                    'admin':admin,
                    'timeInList': timeInListToday,
+                   'data_dict': data_dict,
                    })
 
 
@@ -74,3 +80,18 @@ def admin_logs(request, user_id):
                    'timeOutList': timeOutlist,
                    'client': client,
                    })
+
+
+def ValuesQuerySetToDict(vqs, vqs2):
+    """
+    Converts a query set to a valid json response.
+    Joins two data models [User, UserProfile]
+    """
+    userdata = {"user": []}
+    for item, item2 in zip(vqs, vqs2):
+        temp = {}
+        temp['id'] = item['id']
+        temp['first_name'] = item['first_name']
+        temp['component'] = item2['component']
+        userdata['user'].append(temp)
+    return [userdata]
