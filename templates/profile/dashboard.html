@@ -63,6 +63,7 @@
                 <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 btn-top">
                 <h3>PhilSHORE</h3>
                 <center>
+                <!--
                     {% for user in users %}
                         {% if user.id < 8 %}
                         <div class="col-lg-4 col-md-4 col-sm-1">
@@ -70,6 +71,8 @@
                         </div>
                         {% endif %}
                     {% endfor %}
+                 -->
+                    
                 </center>
                 </div>
                 <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 btn-top">
@@ -150,7 +153,10 @@
         $("#{{timein.userId}}").removeClass("out");
         $("#{{timein.userId}}").addClass("btn-success");
     {% endfor %}
-        console.log("{{data_dict|safe}}");
+    var userData = {{data_dict | safe}}
+    for(var i=0; i < userData.user.length; i++){
+        console.log(userData.user[i]);
+    }
 </script>
 
 {% endblock %}
