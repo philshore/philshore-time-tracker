@@ -75,15 +75,30 @@
         })();
          var date = new Date();
          var n_j_y = date.getMonth()+1+"_"+date.getDate()+"_"+date.getFullYear();
+         var duration = 0;
         {% for timeout in timeOutList%}
             var idOfDataTimeout = "{{ timeout.dateOut|date:'n_j_Y' }}_out";
             var timein = $("#{{ timeout.dateOut|date:'n_j_Y' }}_in").text();
             var durationIn = new Date("{{ timeout.dateOut}} "+ timein);
-            //console.log(durationIn.getMinutes())
             var durationOut = new Date("{{ timeout.dateOut}} {{timeout.timeOut|date:'f:s A'}}");
-            //console.log(durationOut.getMinutes())
-            var duration = ((durationOut.getSeconds()/ 3600)+(durationOut.getMinutes()/ 60) + durationOut.getHours())-((durationIn.getSeconds()/ 3600)+(durationIn.getMinutes()/ 60) + durationIn.getHours())-1; 
-            //console.log(duration);
+
+            var hin = ((durationIn.getSeconds()/ 3600)+(durationIn.getMinutes()/ 60) + durationIn.getHours())
+            var hout = ((durationOut.getSeconds()/ 3600)+(durationOut.getMinutes()/ 60) + durationOut.getHours())
+            
+            if( hin >= 12.00 && hin <= 13.00 ){
+                duration = hout - 13.00;
+                
+                if(duration < 0){
+                    duration = 0.0;
+                }
+            }else if(hout <= 12.00 || hin >= 13.00 ){
+                duration = hout - hin;
+            }else{
+                duration = hout - hin - 1.00;
+            }
+
+            
+
             $("#{{ timeout.dateOut|date:'n_j_Y' }}").append("<td id="+idOfDataTimeout+">{{timeout.timeOut|date:'f:s A'}}</td><td>"+duration.toFixed(3)+" Hours </td>");
         {% endfor %}
 
