@@ -54,6 +54,7 @@ def admin_dashboard(request):
     component = UserComponent.objects.all().exclude(user_id=request.user.id).values(
             'user_id', 'component')
     data_dict = ValuesQuerySetToDict(users, component)
+    print(data_dict)
     dateToday = strftime("%Y-%m-%d")
     timeInListToday = TimeIn.objects.filter(dateIn=dateToday)
     admin = User.objects.get(id=request.user.id)
