@@ -23,6 +23,18 @@
                 <div class="col-lg-4 pull-right">
                      <a href="/profile/dashboard/"> <button class="btn btn-success btn-block" style="margin-top:1.15em;" >Go to Dashboard</button></a>
                 </div>
+                     {% if client.username %}
+
+                     {% else %}
+                        <div class="col-lg-4 pull-right">
+                            <button class="btn btn-primary disabled btn-block" style="margin-top:1.15em;" id="logOut_modal">Time Out</button> 
+                        </div>
+
+                        <div class="col-lg-4 pull-right">
+                            <button class="btn btn-warning btn-block" style="margin-top:1.15em;" id="logIn" >Time In</button>             
+                        </div>
+
+                     {% endif %}
                 {% else %}
                 <div class="col-lg-4 pull-right">
                     <button class="btn btn-primary disabled btn-block" style="margin-top:1.15em;" id="logOut_modal">Time Out</button> 
@@ -87,7 +99,7 @@
             
             if( hin >= 12.00 && hin <= 13.00 ){
                 duration = hout - 13.00;
-                
+
                 if(duration < 0){
                     duration = 0.0;
                 }
