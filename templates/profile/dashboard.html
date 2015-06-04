@@ -57,7 +57,7 @@
     <div class="row" id="dash_row">
         <!-- /col-3 -->
         <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1">
-                {% if admin.is_superuser %}
+                {% if admin.is_superuser and admin.is_staff%}
                 <strong><h1>Welcome, {{admin.username}}!</h1></strong>
                 <span><a href="/profile/"><button class="btn btn-warning">View my Records</button></span>
                 <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 btn-top">
@@ -66,16 +66,6 @@
                 <div id="philshore">
 
                 </div>
-                <!--
-                    {% for user in users %}
-                        {% if user.id < 8 %}
-                        <div class="col-lg-4 col-md-4 col-sm-1">
-                            <a href="/profile/admin_logs/{{user.id}}/"><button id="{{user.id}}" class="btn out btn-circle btn-xl"> {{user.first_name|upper }}</button></a>
-                        </div>
-                        {% endif %}
-                    {% endfor %}
-                 -->
-                    
                 </center>
                 </div>
                 <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 btn-top">
@@ -83,15 +73,6 @@
                 <center>
                 <div id="remap">
                 </div>
-                <!--
-                    {% for user in users %}
-                        {% if user.id > 7 %}
-                        <div class="col-lg-4 col-md-4 col-sm-1">
-                            <a href="/profile/admin_logs/{{user.id}}/"><button id="{{user.id}}" class="btn out btn-circle btn-xl"> {{user.first_name|upper }}</button></a>
-                        </div>
-                        {% endif %}
-                    {% endfor %}
-                -->
                 </center>
                 </div>
                 {% elif admin.is_staff %}
