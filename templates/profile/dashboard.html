@@ -154,8 +154,9 @@
         $("#{{timein.userId}}").addClass("btn-success");
     {% endfor %}
     var userData = {{data_dict | safe}}
+    console.log(userData.user);
     for(var i=0; i < userData.user.length; i++){
-        console.log(userData.user[i]);
+        console.log(userData.user);
     }
 </script>
 
