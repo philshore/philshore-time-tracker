@@ -153,8 +153,8 @@
         $("#{{timein.userId}}").removeClass("out");
         $("#{{timein.userId}}").addClass("btn-success");
     {% endfor %}
-    var userData = "{{data_dict | safe}}"
-    console.log(typeof(userData.user));
+    var userData = "{{data_dict|safe}}"
+    console.log(userData);
     for(var i=0; i < userData.user.length; i++){
         console.log(userData.user);
     }
