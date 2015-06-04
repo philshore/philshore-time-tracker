@@ -23,7 +23,7 @@
                 <div class="col-lg-4 pull-right">
                      <a href="/profile/dashboard/"> <button class="btn btn-success btn-block" style="margin-top:1.15em;" >Go to Dashboard</button></a>
                 </div>
-                {% else %}
+                {% endif %}
                 <div class="col-lg-4 pull-right">
                     <button class="btn btn-primary disabled btn-block" style="margin-top:1.15em;" id="logOut_modal">Time Out</button> 
                 </div>
@@ -32,7 +32,6 @@
                     <button class="btn btn-warning btn-block" style="margin-top:1.15em;" id="logIn" >Time In</button>             
                 </div>
 
-                {% endif %}
             </div>
             <div class="col-lg-10 col-lg-offset-1">
             <table class="table" id="example">
@@ -87,7 +86,7 @@
             
             if( hin >= 12.00 && hin <= 13.00 ){
                 duration = hout - 13.00;
-                
+
                 if(duration < 0){
                     duration = 0.0;
                 }
