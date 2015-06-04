@@ -29,7 +29,7 @@
         margin-right:0.5em;
     }
     .btn-circle.btn-xl {
-      width: 8em;
+      width: 100%;
       height: 7em;
       padding: 10px 16px;
       font-size: 24px;
@@ -65,7 +65,7 @@
                     {% for user in users %}
                         {% if user.id < 8 %}
                         <div class="col-lg-4 col-md-4 col-sm-1">
-                            <a href="/profile/admin_logs/{{user.id}}/"><button id="{{user.id}}" class="btn out btn-circle btn-xl"> {{user.username|upper }}</button></a>
+                            <a href="/profile/admin_logs/{{user.id}}/"><button id="{{user.id}}" class="btn out btn-circle btn-xl"> {{user.first_name|upper }}</button></a>
                         </div>
                         {% endif %}
                     {% endfor %}
@@ -77,7 +77,7 @@
                     {% for user in users %}
                         {% if user.id > 7 %}
                         <div class="col-lg-4 col-md-4 col-sm-1">
-                            <a href="/profile/admin_logs/{{user.id}}/"><button id="{{user.id}}" class="btn out btn-circle btn-xl"> {{user.username|upper }}</button></a>
+                            <a href="/profile/admin_logs/{{user.id}}/"><button id="{{user.id}}" class="btn out btn-circle btn-xl"> {{user.first_name|upper }}</button></a>
                         </div>
                         {% endif %}
                     {% endfor %}
@@ -92,7 +92,7 @@
                     {% for user in users %}
                         {% if user.id > 7 %}
                         <div class="col-lg-4 col-md-4 col-sm-1">
-                            <a href="/profile/admin_logs/{{user.id}}/"><button id="{{user.id}}" class="btn out btn-circle btn-xl"> {{user.username|upper }}</button></a>
+                            <a href="/profile/admin_logs/{{user.id}}/"><button id="{{user.id}}" class="btn out btn-circle btn-xl"> {{user.first_name|upper }}</button></a>
                         </div>
                         {% endif %}
                     {% endfor %}
