@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from apps.register.models import UserComponent
 from apps.user_logs.models import TimeIn, TimeOut
 from time import strftime
+import json
 
 # Create your views here.
 
@@ -50,18 +51,19 @@ def record_timeout(request):
 def admin_dashboard(request):
     page_title = "Admin Dashboard"
     users = User.objects.all().exclude(id=request.user.id).values(
-            'id', 'first_name')
-    component = UserComponent.objects.all().exclude(user_id=request.user.id).values(
-            'user_id', 'component')
+        'id', 'first_name')
+    component = UserComponent.objects.all().exclude(
+        user_id=request.user.id).values(
+        'user_id', 'component')
     data_dict = ValuesQuerySetToDict(users, component)
-    print(data_dict)
+    data_dict = json.dumps(data_dict)
     dateToday = strftime("%Y-%m-%d")
     timeInListToday = TimeIn.objects.filter(dateIn=dateToday)
     admin = User.objects.get(id=request.user.id)
     return render(request, 'profile/dashboard.html',
                   {'page_title': page_title,
                    'users': users,
-                   'admin':admin,
+                   'admin': admin,
                    'timeInList': timeInListToday,
                    'data_dict': data_dict,
                    })
@@ -91,8 +93,8 @@ def ValuesQuerySetToDict(vqs, vqs2):
     userdata = {"user": []}
     for item, item2 in zip(vqs, vqs2):
         temp = {}
-        temp['id'] = item['id']
-        temp['first_name'] = item['first_name']
-        temp['component'] = item2['component']
+        temp["id"] = str(item["id"])
+        temp["first_name"] = item["first_name"]
+        temp["component"] = item2["component"]
         userdata['user'].append(temp)
-    return [userdata]
+    return userdata
