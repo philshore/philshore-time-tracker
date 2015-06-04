@@ -51,9 +51,11 @@ def admin_dashboard(request):
     users = User.objects.all().exclude(id=request.user.id)
     dateToday = strftime("%Y-%m-%d")
     timeInListToday = TimeIn.objects.filter(dateIn=dateToday)
+    admin = User.objects.get(id=request.user.id)
     return render(request, 'profile/dashboard.html',
                   {'page_title': page_title,
                    'users': users,
+                   'admin':admin,
                    'timeInList': timeInListToday,
                    })
 

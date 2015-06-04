@@ -56,8 +56,51 @@
 <div class="container-fluid">
     <div class="row" id="dash_row">
         <!-- /col-3 -->
-        <div class="col-lg-8 col-lg-offset-2">
-            <strong><h1>Welcome, Admin!</h1></strong>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1">
+                {% if admin.is_superuser %}
+                <strong><h1>Welcome, {{admin.username}}!</h1></strong>
+                <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 btn-top">
+                <h3>PhilSHORE</h3>
+                <center>
+                    {% for user in users %}
+                        {% if user.id < 8 %}
+                        <div class="col-lg-4 col-md-4 col-sm-1">
+                            <a href="/profile/admin_logs/{{user.id}}/"><button id="{{user.id}}" class="btn out btn-circle btn-xl"> {{user.username|upper }}</button></a>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </center>
+                </div>
+                <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 btn-top">
+                <h3>REMAP</h3>
+                <center>
+                    {% for user in users %}
+                        {% if user.id > 7 %}
+                        <div class="col-lg-4 col-md-4 col-sm-1">
+                            <a href="/profile/admin_logs/{{user.id}}/"><button id="{{user.id}}" class="btn out btn-circle btn-xl"> {{user.username|upper }}</button></a>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </center>
+                </div>
+                {% elif admin.is_staff %}
+                <strong><h1>Welcome, {{admin.username}}!</h1></strong>
+                <span><a href="/profile/"><button class="btn btn-warning">View my Records</button></span>
+                <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 btn-top">
+                <h3>REMAP</h3>
+                <center>
+                    {% for user in users %}
+                        {% if user.id > 7 %}
+                        <div class="col-lg-4 col-md-4 col-sm-1">
+                            <a href="/profile/admin_logs/{{user.id}}/"><button id="{{user.id}}" class="btn out btn-circle btn-xl"> {{user.username|upper }}</button></a>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </center>
+                </div>
+                {% endif %}
+                <!--List of Users-->
+                <!--
                 <div class="col-lg-8 col-lg-offset-2 btn-top">
                 <center>
                     <div class="col-lg-3">
@@ -94,6 +137,8 @@
                     </div>
                 </center>
                 </div>
+                -->
+                <!--End of user list-->
         </div>
         <!--/col-span-9-->
     </div>

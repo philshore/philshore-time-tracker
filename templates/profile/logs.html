@@ -19,7 +19,7 @@
             {% endif %}
             </div>
             <div class="col-lg-6">
-                {% if user.is_staff %}  
+                {% if user.is_superuser or user.is_staff %}  
                 <div class="col-lg-4 pull-right">
                      <a href="/profile/dashboard/"> <button class="btn btn-success btn-block" style="margin-top:1.15em;" >Go to Dashboard</button></a>
                 </div>
