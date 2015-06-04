@@ -151,15 +151,16 @@
 </div>
 
 <script>
-    {% for timein in timeInList%}
-        $("#{{timein.userId}}").removeClass("out");
-        $("#{{timein.userId}}").addClass("btn-success");
-    {% endfor %}
+
     var userData = {{data_dict|safe}};
     for(var i=0; i < userData.user.length; i++){
         $("#"+String(userData.user[i].component)).append('<div class="col-lg-4 col-md-4 col-sm-1"><a href="/profile/admin_logs/'+userData.user[i].id+'/"><button id="'+userData.user[i].id+'" class="btn out btn-circle btn-xl">'+ userData.user[i].first_name+'</button></a></div>');
-        //console.log(userData.user[i]);
     }
+    {% for timein in timeInList%}
+        $("#{{timein.userId}}").removeClass("out");
+        console.log("{{timein.userId}}" );
+        $("#{{timein.userId}}").addClass("btn-success");
+    {% endfor %}
 </script>
 
 {% endblock %}

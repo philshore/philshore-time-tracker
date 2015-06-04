@@ -12,7 +12,6 @@ def register(request):
     page_title = "Registration"
     registered = False
     if request.method == 'POST':
-        print("hello world")
         # User and Profile data are pulled from the rendered forms.
         user_form = RegistrationUserForm(data=request.POST)
         component_form = RegistrationUserComponentForm(data=request.POST)
