@@ -60,7 +60,7 @@
                     <tr id="{{ timein.dateIn|date:'n_j_Y' }}"> 
                         <td >{{ timein.dateIn }}</td>
                         <td >{{ timein.dateIn|date:"l" }}</td>
-                        <td id="{{ timein.dateIn|date:'n_j_Y' }}_in">{{ timein.timeIn|date:"f:s A" }}</td>
+                        <td id="{{ timein.dateIn|date:'n_j_Y' }}_in">{{ timein.timeIn|date:"h:i:s A"}}</td>
                     </tr>
                 {% endfor %}
 
@@ -93,8 +93,7 @@
             var idOfDataTimeout = "{{ timeout.dateOut|date:'n_j_Y' }}_out";
             var timein = $("#{{ timeout.dateOut|date:'n_j_Y' }}_in").text();
             var durationIn = new Date("{{ timeout.dateOut}} "+ timein);
-            var durationOut = new Date("{{ timeout.dateOut}} {{timeout.timeOut|date:'f:s A'}}");
-
+            var durationOut = new Date("{{ timeout.dateOut}} {{timeout.timeOut|date:'h:i:s A'}}");
             var hin = ((durationIn.getSeconds()/ 3600)+(durationIn.getMinutes()/ 60) + durationIn.getHours())
             var hout = ((durationOut.getSeconds()/ 3600)+(durationOut.getMinutes()/ 60) + durationOut.getHours())
             
@@ -112,7 +111,7 @@
 
             
 
-            $("#{{ timeout.dateOut|date:'n_j_Y' }}").append("<td id="+idOfDataTimeout+">{{timeout.timeOut|date:'f:s A'}}</td><td>"+duration.toFixed(3)+" Hours </td>");
+            $("#{{ timeout.dateOut|date:'n_j_Y' }}").append("<td id="+idOfDataTimeout+">{{timeout.timeOut|date:'h:i:s A'}}</td><td>"+duration.toFixed(3)+" Hours </td>");
         {% endfor %}
 
         if($("#"+n_j_y).length==1){
