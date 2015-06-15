@@ -14,7 +14,7 @@ def user_login(request):
     page_title = "Login"
     # Check if user is logged in
     if request.user.is_staff:
-        return redirect('/dashboard/')
+        return redirect('/profile/dashboard')
     else:
         if request.user.is_active:
             # Redirect to user profile page
