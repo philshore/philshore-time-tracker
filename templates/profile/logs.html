@@ -124,7 +124,10 @@
         }
 
 
-     $('#example').dataTable();
+     $('#example').dataTable({
+        "order": [[ 0, "desc"]]
+
+     });
 
         $("#logIn").on("click",function(){
             location.href="/profile/timein"
