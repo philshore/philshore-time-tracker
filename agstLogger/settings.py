@@ -83,7 +83,7 @@ DATABASES = {
         'NAME': 'agstlogger',
         'USER': 'postgres',
         'PASSWORD': 'tidaldev',
-        'HOST': 'localhost',
+        'HOST': '10.33.88.101',
         'PORT': '5432'
     }
 }
