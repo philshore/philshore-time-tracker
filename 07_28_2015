@@ -1,0 +1,2400 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.3.9
+-- Dumped by pg_dump version 9.3.9
+-- Started on 2015-07-28 07:04:50 PHT
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 194 (class 3079 OID 11787)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2145 (class 0 OID 0)
+-- Dependencies: 194
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 177 (class 1259 OID 16418)
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE auth_group (
+    id integer NOT NULL,
+    name character varying(80) NOT NULL
+);
+
+
+ALTER TABLE public.auth_group OWNER TO postgres;
+
+--
+-- TOC entry 176 (class 1259 OID 16416)
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE auth_group_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2146 (class 0 OID 0)
+-- Dependencies: 176
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE auth_group_id_seq OWNED BY auth_group.id;
+
+
+--
+-- TOC entry 179 (class 1259 OID 16428)
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE auth_group_permissions (
+    id integer NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_group_permissions OWNER TO postgres;
+
+--
+-- TOC entry 178 (class 1259 OID 16426)
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE auth_group_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2147 (class 0 OID 0)
+-- Dependencies: 178
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE auth_group_permissions_id_seq OWNED BY auth_group_permissions.id;
+
+
+--
+-- TOC entry 175 (class 1259 OID 16408)
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE auth_permission (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.auth_permission OWNER TO postgres;
+
+--
+-- TOC entry 174 (class 1259 OID 16406)
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE auth_permission_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_permission_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2148 (class 0 OID 0)
+-- Dependencies: 174
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE auth_permission_id_seq OWNED BY auth_permission.id;
+
+
+--
+-- TOC entry 181 (class 1259 OID 16438)
+-- Name: auth_user; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE auth_user (
+    id integer NOT NULL,
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone,
+    is_superuser boolean NOT NULL,
+    username character varying(30) NOT NULL,
+    first_name character varying(30) NOT NULL,
+    last_name character varying(30) NOT NULL,
+    email character varying(254) NOT NULL,
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    date_joined timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.auth_user OWNER TO postgres;
+
+--
+-- TOC entry 183 (class 1259 OID 16448)
+-- Name: auth_user_groups; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE auth_user_groups (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_groups OWNER TO postgres;
+
+--
+-- TOC entry 182 (class 1259 OID 16446)
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE auth_user_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_groups_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2149 (class 0 OID 0)
+-- Dependencies: 182
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE auth_user_groups_id_seq OWNED BY auth_user_groups.id;
+
+
+--
+-- TOC entry 180 (class 1259 OID 16436)
+-- Name: auth_user_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE auth_user_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2150 (class 0 OID 0)
+-- Dependencies: 180
+-- Name: auth_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE auth_user_id_seq OWNED BY auth_user.id;
+
+
+--
+-- TOC entry 185 (class 1259 OID 16458)
+-- Name: auth_user_user_permissions; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE auth_user_user_permissions (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_user_permissions OWNER TO postgres;
+
+--
+-- TOC entry 184 (class 1259 OID 16456)
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE auth_user_user_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_user_permissions_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2151 (class 0 OID 0)
+-- Dependencies: 184
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE auth_user_user_permissions_id_seq OWNED BY auth_user_user_permissions.id;
+
+
+--
+-- TOC entry 187 (class 1259 OID 16512)
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    content_type_id integer,
+    user_id integer NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE public.django_admin_log OWNER TO postgres;
+
+--
+-- TOC entry 186 (class 1259 OID 16510)
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE django_admin_log_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_admin_log_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2152 (class 0 OID 0)
+-- Dependencies: 186
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE django_admin_log_id_seq OWNED BY django_admin_log.id;
+
+
+--
+-- TOC entry 173 (class 1259 OID 16398)
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE django_content_type (
+    id integer NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.django_content_type OWNER TO postgres;
+
+--
+-- TOC entry 172 (class 1259 OID 16396)
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE django_content_type_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_content_type_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2153 (class 0 OID 0)
+-- Dependencies: 172
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE django_content_type_id_seq OWNED BY django_content_type.id;
+
+
+--
+-- TOC entry 171 (class 1259 OID 16387)
+-- Name: django_migrations; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE django_migrations (
+    id integer NOT NULL,
+    app character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    applied timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_migrations OWNER TO postgres;
+
+--
+-- TOC entry 170 (class 1259 OID 16385)
+-- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE django_migrations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_migrations_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2154 (class 0 OID 0)
+-- Dependencies: 170
+-- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE django_migrations_id_seq OWNED BY django_migrations.id;
+
+
+--
+-- TOC entry 189 (class 1259 OID 16546)
+-- Name: django_session; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_session OWNER TO postgres;
+
+--
+-- TOC entry 188 (class 1259 OID 16536)
+-- Name: register_usercomponent; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE register_usercomponent (
+    user_id integer NOT NULL,
+    component character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.register_usercomponent OWNER TO postgres;
+
+--
+-- TOC entry 191 (class 1259 OID 16559)
+-- Name: user_logs_timein; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE user_logs_timein (
+    id integer NOT NULL,
+    "userId" integer NOT NULL,
+    "dateIn" date NOT NULL,
+    "timeIn" time without time zone NOT NULL
+);
+
+
+ALTER TABLE public.user_logs_timein OWNER TO postgres;
+
+--
+-- TOC entry 190 (class 1259 OID 16557)
+-- Name: user_logs_timein_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE user_logs_timein_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.user_logs_timein_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2155 (class 0 OID 0)
+-- Dependencies: 190
+-- Name: user_logs_timein_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE user_logs_timein_id_seq OWNED BY user_logs_timein.id;
+
+
+--
+-- TOC entry 193 (class 1259 OID 16567)
+-- Name: user_logs_timeout; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE user_logs_timeout (
+    id integer NOT NULL,
+    "userId" integer NOT NULL,
+    "dateOut" date NOT NULL,
+    "timeOut" time without time zone NOT NULL
+);
+
+
+ALTER TABLE public.user_logs_timeout OWNER TO postgres;
+
+--
+-- TOC entry 192 (class 1259 OID 16565)
+-- Name: user_logs_timeout_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE user_logs_timeout_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.user_logs_timeout_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2156 (class 0 OID 0)
+-- Dependencies: 192
+-- Name: user_logs_timeout_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE user_logs_timeout_id_seq OWNED BY user_logs_timeout.id;
+
+
+--
+-- TOC entry 1933 (class 2604 OID 16421)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_group ALTER COLUMN id SET DEFAULT nextval('auth_group_id_seq'::regclass);
+
+
+--
+-- TOC entry 1934 (class 2604 OID 16431)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- TOC entry 1932 (class 2604 OID 16411)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_permission ALTER COLUMN id SET DEFAULT nextval('auth_permission_id_seq'::regclass);
+
+
+--
+-- TOC entry 1935 (class 2604 OID 16441)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_user ALTER COLUMN id SET DEFAULT nextval('auth_user_id_seq'::regclass);
+
+
+--
+-- TOC entry 1936 (class 2604 OID 16451)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_user_groups ALTER COLUMN id SET DEFAULT nextval('auth_user_groups_id_seq'::regclass);
+
+
+--
+-- TOC entry 1937 (class 2604 OID 16461)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('auth_user_user_permissions_id_seq'::regclass);
+
+
+--
+-- TOC entry 1938 (class 2604 OID 16515)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY django_admin_log ALTER COLUMN id SET DEFAULT nextval('django_admin_log_id_seq'::regclass);
+
+
+--
+-- TOC entry 1931 (class 2604 OID 16401)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY django_content_type ALTER COLUMN id SET DEFAULT nextval('django_content_type_id_seq'::regclass);
+
+
+--
+-- TOC entry 1930 (class 2604 OID 16390)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY django_migrations ALTER COLUMN id SET DEFAULT nextval('django_migrations_id_seq'::regclass);
+
+
+--
+-- TOC entry 1940 (class 2604 OID 16562)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY user_logs_timein ALTER COLUMN id SET DEFAULT nextval('user_logs_timein_id_seq'::regclass);
+
+
+--
+-- TOC entry 1941 (class 2604 OID 16570)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY user_logs_timeout ALTER COLUMN id SET DEFAULT nextval('user_logs_timeout_id_seq'::regclass);
+
+
+--
+-- TOC entry 2121 (class 0 OID 16418)
+-- Dependencies: 177
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY auth_group (id, name) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2157 (class 0 OID 0)
+-- Dependencies: 176
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('auth_group_id_seq', 1, false);
+
+
+--
+-- TOC entry 2123 (class 0 OID 16428)
+-- Dependencies: 179
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY auth_group_permissions (id, group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2158 (class 0 OID 0)
+-- Dependencies: 178
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- TOC entry 2119 (class 0 OID 16408)
+-- Dependencies: 175
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add log entry	1	add_logentry
+2	Can change log entry	1	change_logentry
+3	Can delete log entry	1	delete_logentry
+4	Can add permission	2	add_permission
+5	Can change permission	2	change_permission
+6	Can delete permission	2	delete_permission
+7	Can add group	3	add_group
+8	Can change group	3	change_group
+9	Can delete group	3	delete_group
+10	Can add user	4	add_user
+11	Can change user	4	change_user
+12	Can delete user	4	delete_user
+13	Can add content type	5	add_contenttype
+14	Can change content type	5	change_contenttype
+15	Can delete content type	5	delete_contenttype
+16	Can add session	6	add_session
+17	Can change session	6	change_session
+18	Can delete session	6	delete_session
+19	Can add user component	7	add_usercomponent
+20	Can change user component	7	change_usercomponent
+21	Can delete user component	7	delete_usercomponent
+22	Can add time in	8	add_timein
+23	Can change time in	8	change_timein
+24	Can delete time in	8	delete_timein
+25	Can add time out	9	add_timeout
+26	Can change time out	9	change_timeout
+27	Can delete time out	9	delete_timeout
+\.
+
+
+--
+-- TOC entry 2159 (class 0 OID 0)
+-- Dependencies: 174
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('auth_permission_id_seq', 27, true);
+
+
+--
+-- TOC entry 2125 (class 0 OID 16438)
+-- Dependencies: 181
+-- Data for Name: auth_user; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
+28	pbkdf2_sha256$20000$Nbw0d9FxcX67$+cEupPegY/WASG8yt+f7WnyPylN5GFJ5i5yxoU61wBQ=	\N	f	maan	Marianne Eleanor	Catanyag	meacatanyag@yahoo.com	f	t	2015-07-16 15:48:41.470178+08
+24	pbkdf2_sha256$20000$kncCOtgEJMf8$ShpmcFQ1wnOS7o3eFmAgQkJaj8KPkWIXleLWNmt+BA0=	2015-07-23 09:32:13.597692+08	f	gcgano	Greyland	Agno	greyland.agno@gmail.com	f	t	2015-06-11 09:48:07.186953+08
+2	pbkdf2_sha256$20000$zZzk23hmEJ4L$yqcl0lSmfBMz94iEi8l4KMADeBwE7NjxtwbWytYxC9I=	2015-07-22 08:18:52.996433+08	f	cham	Charmyne	Mamador	charmynemamador@gmail.com	f	t	2015-06-01 16:57:49.401306+08
+19	pbkdf2_sha256$20000$hYMsiEyOtdk9$JGRhfejp0nzGl4Wnu36QKSMjkHCpTjQGzSxWoWNq298=	2015-07-27 09:24:28.674891+08	f	jlcuasay	Jodel	Cuasay	jlcuasay@gmail.com	f	t	2015-06-10 12:11:40.238165+08
+13	pbkdf2_sha256$20000$ZTKnPgRgFEiT$UcFk2iBMbMxqsvHNYzh5nwzrlA4soJXI8jf7j1VD17o=	2015-07-27 07:03:42.033369+08	f	jassontocloy	jasson	tocloy	jassontocloy@gmail.com	f	t	2015-06-10 08:35:20.983952+08
+7	pbkdf2_sha256$20000$s8JBMhjLbALa$csIecHuelC9D2OXJg34ouBiuE+UYJnRfTwOxSb2jcZE=	\N	f	test	potato	mr potatohead	patatas@hotmail.com	f	f	2015-06-04 16:22:41.096161+08
+3	pbkdf2_sha256$20000$aJtqg6iOsSu6$c6KKK05FG8/JqxQqCffKKGCcpmpdAFB6tYZPd4UX02I=	2015-07-21 08:08:36.481225+08	f	tootles09	JOSELITO	CRUZ	joeytootlescruz21@gmail.com	f	t	2015-06-01 17:00:16.015205+08
+9	pbkdf2_sha256$20000$3j10rz2JILfs$TSFZEy+vQR2fqkXfFHKPAJ0cpkrc7DdiN3tS93YhJe4=	2015-07-27 15:53:58.272249+08	f	camilleinocencio	LOUREAL CAMILLE	INOCENCIO	lcvinocencio@gmail.com	t	t	2015-06-10 07:40:10.199398+08
+16	pbkdf2_sha256$20000$4bRRyakQDbQ1$6b5zeiA6Ww+RwFzRy8lxlNH41VVVzYZKp6zhwK+VHsc=	2015-07-23 09:47:03.917838+08	f	khsevilla	Klathea	Sevilla	klathea.sevilla1@gmail.com	f	t	2015-06-10 09:08:58.374095+08
+23	pbkdf2_sha256$20000$pTdogKon15gc$zlnq+pLhjeD152uaSJl8MEjKDpnavs3sAuoejJoD89U=	2015-07-27 07:39:04.899306+08	f	rowane	Rowane	Fesalbon	waneaustria@gmail.com	f	t	2015-06-11 07:23:40.070799+08
+10	pbkdf2_sha256$20000$ena8Y0ag1Y6Z$D/IW7UvTCfjXO9yA0sCuEHo1GNz4zodpJt/fJGjb1Qk=	2015-07-27 07:46:06.423896+08	f	maxhenry	Max Henry	Aficial	maxaficial.dost@gmail.com	f	t	2015-06-10 07:49:38.850944+08
+25	pbkdf2_sha256$20000$m41B6ZMkGvUs$ADW+BTI715dBkaJBFvjMfJjWOUs0tiPXa9L8VFxLYgc=	2015-07-27 16:06:25.269582+08	f	Jerome	Jerome	Tolentino	tolentinojeromet@gmail.com	f	t	2015-06-15 08:32:44.749711+08
+18	pbkdf2_sha256$20000$qFUIK9WSNhb2$Of9ZPMtA8HuJV1St25APsWHS2UajphMO6KIZsoJlE9s=	2015-07-27 16:07:16.423503+08	f	solarben	Ben Hur	Pintor	bhs.pintor@gmail.com	f	t	2015-06-10 10:15:55.234587+08
+14	pbkdf2_sha256$20000$ypQ2V5VKrexv$1Z4yie7qK6ElHer497UlMGoYM4gp9CQXK7QYpI/4xQo=	2015-07-27 07:52:28.668407+08	f	asguillermo	Ana Margarita	Guillermo	anamargarita.guillermo@gmail.com	f	t	2015-06-10 09:04:56.200738+08
+11	pbkdf2_sha256$20000$CgIRf4qBr8tZ$VqIUZN1ruwMcACYBxkS6c33xKlHlANagRQ+0XT1j/QQ=	2015-07-27 16:10:42.138889+08	f	thor	Ma. Victoria	Rejuso	victoria.rejuso@gmail.com	f	t	2015-06-10 07:52:38.986172+08
+4	pbkdf2_sha256$20000$WXqN5LY6a8EB$04YyLz8ph3MXhuDs5FyO0vpHCZF3gD1EWNhNTVm1YgM=	2015-07-27 16:57:35.954469+08	f	mikebausas	Michael	Bausas	michaelbausas@gmail.com	f	t	2015-06-01 17:03:03.678291+08
+1	pbkdf2_sha256$20000$e3FpvMfJf03K$E9NX6nqeM5ikg2Gkj1xCoTlkvlIWXfJnM3aESV9rfaU=	2015-07-28 06:24:03.10035+08	f	lkpanganiban	ian	panganiban	ian.panganiban@gmail.com	f	t	2015-06-01 13:28:14.227714+08
+15	pbkdf2_sha256$20000$xTIaCRP89LAZ$F2qOilCg528SHAmkoCHj6sMTKsSzGF6XMUtEe8qfgGw=	2015-07-27 08:51:07.487907+08	f	Yarakaye	Jara Kaye	Villanueva	jarakayevillanueva@gmail.com	f	t	2015-06-10 09:05:25.569319+08
+21	pbkdf2_sha256$20000$ch8X2N66wcaE$0D8Bj64Kx5G06bN2pfOSafV7CYNsv7XM2IoIx0OEcEw=	2015-06-10 17:20:19.115813+08	f	Imee	Imee	Saladaga	saladaga_imee@yahoo.com	f	t	2015-06-10 17:19:51.696481+08
+6	pbkdf2_sha256$20000$mbGX8345e0lO$hZZ/4nj0lfdHHpAZwKf+kNnIf2O4u+IAibq0iTmNmsI=	2015-07-14 19:30:50.02908+08	t	concon.ang	Rosario	Ang	concon.ang@gmail.com	t	t	2015-06-04 11:56:26.15432+08
+5	pbkdf2_sha256$20000$HfTTVXIdnLqd$o4ec4xCZjoQOwq8rOoSbDEBm/5DthRLFs7/LUZmHkOI=	2015-07-28 06:45:24.077854+08	t	admin	admin	admin	philshoreteam@gmail.com	t	t	2015-06-02 14:57:25.272014+08
+20	pbkdf2_sha256$20000$82PYuQ49uaxv$fo3Vp6975pcef8Ap6cnMZevZtqT/mpY3srjbPq/zaVg=	\N	f	Rubyanne	Ruby Anne	Benavidez	rubyannebenavidez@gmail.com	f	f	2015-06-10 17:19:37.974794+08
+12	pbkdf2_sha256$20000$6Y3Khf8NjHKX$BeMr0MR5ZSNnUHWAVfh2Xg1L6KHR5/FG9b+rglWL/M8=	2015-07-23 17:51:40.681289+08	f	eulafae	Eula Fae	Sola	eulafae@gmail.com	f	t	2015-06-10 08:15:35.449232+08
+26	pbkdf2_sha256$20000$y9YOTTZFlx5f$XORrxccCy2Si/7sEFxOByQtmVu5PWuZAcbqVZF67M5U=	2015-07-27 08:53:14.771702+08	f	brybaltazar	Bryan	Baltazar	brybaltazar@gmail.com	f	t	2015-06-18 10:48:19.078656+08
+22	pbkdf2_sha256$20000$yME4JrfPz0bK$SiyglIKt4nWt5LqyX6OuG+qfTQ8hqmNGNmtBnqmkR/0=	2015-07-27 09:16:52.484044+08	f	mjbenavidez	Ruby Anne	Benavidez	marubyannebenavidez@gmail.com	f	t	2015-06-10 17:23:31.420785+08
+17	pbkdf2_sha256$20000$syyaLw7Q2INO$pgBbOc4L3mJ2M8ke86z3LGBng8S8/vo09APucf2YgQs=	2015-07-22 09:09:42.656617+08	f	mvremolador	Marjorie	Remolador	mvremolador@gmail.com	f	t	2015-06-10 09:10:17.820083+08
+8	pbkdf2_sha256$20000$Iuu5KSnISQJq$HrtL+sZ2eb3FyGH9cJ09BS63EC5iKnA6SHgOIZ9d4UI=	2015-07-27 09:20:49.341357+08	f	justineteves	Justine	Teves	justine.teves@gmail.com	f	t	2015-06-09 17:56:18.170319+08
+\.
+
+
+--
+-- TOC entry 2127 (class 0 OID 16448)
+-- Dependencies: 183
+-- Data for Name: auth_user_groups; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY auth_user_groups (id, user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2160 (class 0 OID 0)
+-- Dependencies: 182
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('auth_user_groups_id_seq', 1, false);
+
+
+--
+-- TOC entry 2161 (class 0 OID 0)
+-- Dependencies: 180
+-- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('auth_user_id_seq', 28, true);
+
+
+--
+-- TOC entry 2129 (class 0 OID 16458)
+-- Dependencies: 185
+-- Data for Name: auth_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2162 (class 0 OID 0)
+-- Dependencies: 184
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('auth_user_user_permissions_id_seq', 1, false);
+
+
+--
+-- TOC entry 2131 (class 0 OID 16512)
+-- Dependencies: 187
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2163 (class 0 OID 0)
+-- Dependencies: 186
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('django_admin_log_id_seq', 1, false);
+
+
+--
+-- TOC entry 2117 (class 0 OID 16398)
+-- Dependencies: 173
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY django_content_type (id, app_label, model) FROM stdin;
+1	admin	logentry
+2	auth	permission
+3	auth	group
+4	auth	user
+5	contenttypes	contenttype
+6	sessions	session
+7	register	usercomponent
+8	user_logs	timein
+9	user_logs	timeout
+\.
+
+
+--
+-- TOC entry 2164 (class 0 OID 0)
+-- Dependencies: 172
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('django_content_type_id_seq', 9, true);
+
+
+--
+-- TOC entry 2115 (class 0 OID 16387)
+-- Dependencies: 171
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY django_migrations (id, app, name, applied) FROM stdin;
+1	contenttypes	0001_initial	2015-06-01 11:45:45.504148+08
+2	auth	0001_initial	2015-06-01 11:45:45.6485+08
+3	admin	0001_initial	2015-06-01 11:45:45.699347+08
+4	contenttypes	0002_remove_content_type_name	2015-06-01 11:45:45.740222+08
+5	auth	0002_alter_permission_name_max_length	2015-06-01 11:45:45.758793+08
+6	auth	0003_alter_user_email_max_length	2015-06-01 11:45:45.783937+08
+7	auth	0004_alter_user_username_opts	2015-06-01 11:45:45.799219+08
+8	auth	0005_alter_user_last_login_null	2015-06-01 11:45:45.820419+08
+9	auth	0006_require_contenttypes_0002	2015-06-01 11:45:45.825538+08
+10	auth	0007_auto_20150511_0502	2015-06-01 11:45:45.851239+08
+11	register	0001_initial	2015-06-01 11:45:45.89187+08
+12	sessions	0001_initial	2015-06-01 11:45:45.925272+08
+13	user_logs	0001_initial	2015-06-01 14:08:39.974711+08
+\.
+
+
+--
+-- TOC entry 2165 (class 0 OID 0)
+-- Dependencies: 170
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('django_migrations_id_seq', 13, true);
+
+
+--
+-- TOC entry 2133 (class 0 OID 16546)
+-- Dependencies: 189
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY django_session (session_key, session_data, expire_date) FROM stdin;
+cd3ff7pvfcca09fx30pqlun5zrtrx1x0	NzM1MWZlY2NhZThkODE3ZWE2YTRlNDY5NmEyZDkzMTNmNTM4YjRhZTp7Il9hdXRoX3VzZXJfaGFzaCI6ImRlZjExZDE3NGE1MGFmOThjMzI4NzY2ZjVjODY2ODA4ZWZlOWJkZWMiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxOSJ9	2015-07-02 17:10:38.731822+08
+lfnkuq0f6s1us4sgepm1mpobl4drhil2	NzM1MWZlY2NhZThkODE3ZWE2YTRlNDY5NmEyZDkzMTNmNTM4YjRhZTp7Il9hdXRoX3VzZXJfaGFzaCI6ImRlZjExZDE3NGE1MGFmOThjMzI4NzY2ZjVjODY2ODA4ZWZlOWJkZWMiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxOSJ9	2015-08-10 09:24:28.679629+08
+dme5bblbyjfvrl8vdrzsk6bavuougw0d	MDg4ZmM1Y2I0YjVmMWIxYjJmN2M2NGIwOGQxMmZjNGZjNDdlMjJkMTp7Il9hdXRoX3VzZXJfaGFzaCI6ImU2ZThjZTI5M2ViY2U5NjRhMDFlMTExMTQ5M2NmNTk5Y2JhODU1ZTQiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxMSJ9	2015-06-29 16:55:30.940022+08
+f29luahuqbx8tkdrob95bld0f6tv4s9b	NWYzZDYyMzM1MzJlZDhjYzBmZjk3ZmZhMjYyNjg4MGFmOTE4YmMwMDp7Il9hdXRoX3VzZXJfaGFzaCI6IjRmMmViOWE0MmM3NzBkMzI1N2VhZWI1ZGQ0NTY5Yjc3ZWVmZmZhZTMiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2015-06-15 16:56:49.187869+08
+ab2ovq6pl0eh31jjvtucod5hz57m24k9	MDg4ZmM1Y2I0YjVmMWIxYjJmN2M2NGIwOGQxMmZjNGZjNDdlMjJkMTp7Il9hdXRoX3VzZXJfaGFzaCI6ImU2ZThjZTI5M2ViY2U5NjRhMDFlMTExMTQ5M2NmNTk5Y2JhODU1ZTQiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxMSJ9	2015-06-25 07:57:12.491105+08
+v9nkcjskjowc4xha891s889uwh4m8e7i	ODY3NTI1ZjdiYTQzZTM3OWEzMGIzMmQ0NjA3YjQyNWU2ODdiMjNkZTp7Il9hdXRoX3VzZXJfaGFzaCI6ImUyM2QxZjJkOWEyNTAxYWZjZmYxOTg0ODFlMjBmODljMDRjYTA5YzYiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiI0In0=	2015-06-18 07:45:40.848763+08
+od7ev28tnchxf0npivshr6npbcs1eu0z	ZWIwMmQ5YjJkNjhhZWZjYWQ2MzRjMGZkNWI0ZDc2NDU4MDFjOGYxYTp7Il9hdXRoX3VzZXJfaGFzaCI6ImQ2MWU1OWRiOThhZjliNGM1ZDkyNjVhOTBjNTFlMDgxN2VjNGIyMTUiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIyIn0=	2015-06-15 17:01:25.445208+08
+3svgoncp5u29igl60isfofq9iw5pja13	MmM4N2UwM2I3MzQyNjNmZGVhZjExNzhkMTc1ZDhkYjcyMmRjNDlmMDp7Il9hdXRoX3VzZXJfaGFzaCI6ImY3ZDA0NTBhMzJlNmYzYTk1MGMzOWI5NDA1Y2UwZWQwNDIzYWMzNzIiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiI1In0=	2015-06-24 09:16:31.335628+08
+m93zegsea40sz9ndpg23h9h5ge6b6yqe	NzM1MWZlY2NhZThkODE3ZWE2YTRlNDY5NmEyZDkzMTNmNTM4YjRhZTp7Il9hdXRoX3VzZXJfaGFzaCI6ImRlZjExZDE3NGE1MGFmOThjMzI4NzY2ZjVjODY2ODA4ZWZlOWJkZWMiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxOSJ9	2015-06-24 12:12:10.718075+08
+qoiidu5gqss1u803v6z2kvpw7xa0h2rp	NWYzZDYyMzM1MzJlZDhjYzBmZjk3ZmZhMjYyNjg4MGFmOTE4YmMwMDp7Il9hdXRoX3VzZXJfaGFzaCI6IjRmMmViOWE0MmM3NzBkMzI1N2VhZWI1ZGQ0NTY5Yjc3ZWVmZmZhZTMiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2015-06-16 07:59:35.311977+08
+0q77dd8m7lpj3vzgnqkx5f4gunwjpqol	MDg4ZmM1Y2I0YjVmMWIxYjJmN2M2NGIwOGQxMmZjNGZjNDdlMjJkMTp7Il9hdXRoX3VzZXJfaGFzaCI6ImU2ZThjZTI5M2ViY2U5NjRhMDFlMTExMTQ5M2NmNTk5Y2JhODU1ZTQiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxMSJ9	2015-06-24 16:32:12.397225+08
+dtwcrawoitck0azj41w8vlm58x2vcyx3	NmIzNWEwY2ZlODYwMDZlMTFkY2Y4YTQ1ZTY0MTA4NWY3ZDk3ZDIzNTp7Il9hdXRoX3VzZXJfaGFzaCI6IjFlMGQyZjY5ZjU0NGRlYjE4MDAwOTQzNWNlZDA0MWNlODY2MzZhMTkiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiI2In0=	2015-06-23 17:44:38.555946+08
+e43lx5rnyfdollmf20xp0u5b9a8u5qbu	ZWIwMmQ5YjJkNjhhZWZjYWQ2MzRjMGZkNWI0ZDc2NDU4MDFjOGYxYTp7Il9hdXRoX3VzZXJfaGFzaCI6ImQ2MWU1OWRiOThhZjliNGM1ZDkyNjVhOTBjNTFlMDgxN2VjNGIyMTUiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIyIn0=	2015-06-17 16:43:16.512826+08
+iqekbeum3wq42flu6rlsev96hkd88ica	ZWIwMmQ5YjJkNjhhZWZjYWQ2MzRjMGZkNWI0ZDc2NDU4MDFjOGYxYTp7Il9hdXRoX3VzZXJfaGFzaCI6ImQ2MWU1OWRiOThhZjliNGM1ZDkyNjVhOTBjNTFlMDgxN2VjNGIyMTUiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIyIn0=	2015-06-16 09:12:56.556881+08
+5l7z388uy2ns9y0cs7z4fkr21idg2yiu	NWYzZDYyMzM1MzJlZDhjYzBmZjk3ZmZhMjYyNjg4MGFmOTE4YmMwMDp7Il9hdXRoX3VzZXJfaGFzaCI6IjRmMmViOWE0MmM3NzBkMzI1N2VhZWI1ZGQ0NTY5Yjc3ZWVmZmZhZTMiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2015-06-16 09:13:01.880438+08
+psxrwgix7xb98trn5y7w8ip89hmpvo8g	NWYzZDYyMzM1MzJlZDhjYzBmZjk3ZmZhMjYyNjg4MGFmOTE4YmMwMDp7Il9hdXRoX3VzZXJfaGFzaCI6IjRmMmViOWE0MmM3NzBkMzI1N2VhZWI1ZGQ0NTY5Yjc3ZWVmZmZhZTMiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2015-06-16 10:17:15.76401+08
+4a5skpb8t222dgtsc0rdlk8ccuczlrem	MDg4ZmM1Y2I0YjVmMWIxYjJmN2M2NGIwOGQxMmZjNGZjNDdlMjJkMTp7Il9hdXRoX3VzZXJfaGFzaCI6ImU2ZThjZTI5M2ViY2U5NjRhMDFlMTExMTQ5M2NmNTk5Y2JhODU1ZTQiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxMSJ9	2015-06-24 17:00:47.154403+08
+hz2468dcik3y5xuvcru6r2csf2t983f2	MmM4N2UwM2I3MzQyNjNmZGVhZjExNzhkMTc1ZDhkYjcyMmRjNDlmMDp7Il9hdXRoX3VzZXJfaGFzaCI6ImY3ZDA0NTBhMzJlNmYzYTk1MGMzOWI5NDA1Y2UwZWQwNDIzYWMzNzIiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiI1In0=	2015-06-19 06:42:32.596294+08
+rlrzgos3x57gmbic5b84c72e8ycgv304	NzM1MWZlY2NhZThkODE3ZWE2YTRlNDY5NmEyZDkzMTNmNTM4YjRhZTp7Il9hdXRoX3VzZXJfaGFzaCI6ImRlZjExZDE3NGE1MGFmOThjMzI4NzY2ZjVjODY2ODA4ZWZlOWJkZWMiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxOSJ9	2015-06-24 17:10:38.423234+08
+q9d1a6ux5a3ob5ecjc0w9di4hq6yiik8	MWIwYmE0YjhiYzgyMmEzYjM2YjdkMzhiNTFiNzFlNmEzOTliOWRlNzp7Il9hdXRoX3VzZXJfaGFzaCI6IjNlZDM4MDE2MmI5ZDQ1ZWRkNWQwYjNlZWJiN2JiMDc3ZDdmYzBiZTYiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIyMyJ9	2015-06-25 07:23:51.813048+08
+di306jyc1he3lj02t1mlmwv2jpnae6qi	NWYzZDYyMzM1MzJlZDhjYzBmZjk3ZmZhMjYyNjg4MGFmOTE4YmMwMDp7Il9hdXRoX3VzZXJfaGFzaCI6IjRmMmViOWE0MmM3NzBkMzI1N2VhZWI1ZGQ0NTY5Yjc3ZWVmZmZhZTMiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2015-06-29 06:22:21.453789+08
+gs037ygnpg5dvrrfkj5of0brn990imq7	ZDg3NWI3OTVmYTExYTllYzU4ZjZiMmNkMzQyOGM3N2E2MmExMDEyNDp7Il9hdXRoX3VzZXJfaGFzaCI6IjM3MDA3MGI1N2MwODViNjk3NDc1OTlhOGMwZmY4MTBlYTY1NjZhMmUiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxNCJ9	2015-07-03 17:01:53.453986+08
+aejp8s54fs0gfomt8it6zcew41m4pl3m	NzM1MWZlY2NhZThkODE3ZWE2YTRlNDY5NmEyZDkzMTNmNTM4YjRhZTp7Il9hdXRoX3VzZXJfaGFzaCI6ImRlZjExZDE3NGE1MGFmOThjMzI4NzY2ZjVjODY2ODA4ZWZlOWJkZWMiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxOSJ9	2015-07-09 12:13:05.452893+08
+mw73mmqdfuc6wbirul7w36b6aqeluva7	ZDg3NWI3OTVmYTExYTllYzU4ZjZiMmNkMzQyOGM3N2E2MmExMDEyNDp7Il9hdXRoX3VzZXJfaGFzaCI6IjM3MDA3MGI1N2MwODViNjk3NDc1OTlhOGMwZmY4MTBlYTY1NjZhMmUiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxNCJ9	2015-07-10 17:31:09.797591+08
+2xcxbzmomfvaicqnmc1bvmipxhe8tp1z	MDE3YjkxMDQ2Y2ViZWJlZTRiZWVmNmE2ZWI0NjcyN2IwZWYyNWIzNzp7Il9hdXRoX3VzZXJfaGFzaCI6ImVlMzlhMDBjYjkxMTE2N2ZlZmY4NjhmMmExMDg4MmIwNjI4Mjk1MzgiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIyNiJ9	2015-08-04 17:54:42.296301+08
+enwzz7kvwz4h5vejieez2rbhzftis9tq	MDg4ZmM1Y2I0YjVmMWIxYjJmN2M2NGIwOGQxMmZjNGZjNDdlMjJkMTp7Il9hdXRoX3VzZXJfaGFzaCI6ImU2ZThjZTI5M2ViY2U5NjRhMDFlMTExMTQ5M2NmNTk5Y2JhODU1ZTQiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxMSJ9	2015-07-27 06:49:14.828856+08
+9nfzju46ijd2w5gprd53a5i0pfff5zq7	YzM0ZWVhNTU2ZTVkM2UzN2Y2YzgyMzhhZGVhOGJhMDAwOTExMDJiNDp7Il9hdXRoX3VzZXJfaGFzaCI6ImMxYTkwNTQyYmUzODJmYzJjY2RhNzM1ZWZmZTc1YjFhM2QxNWY4NDAiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIyNSJ9	2015-07-28 17:00:40.266321+08
+4ein8larstk9kav45vlb17wr8r7ju9tm	NzM1MWZlY2NhZThkODE3ZWE2YTRlNDY5NmEyZDkzMTNmNTM4YjRhZTp7Il9hdXRoX3VzZXJfaGFzaCI6ImRlZjExZDE3NGE1MGFmOThjMzI4NzY2ZjVjODY2ODA4ZWZlOWJkZWMiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxOSJ9	2015-07-09 12:13:07.756793+08
+yid2owzydrdyogdsda8tz8dfr5wikdwf	MDg4ZmM1Y2I0YjVmMWIxYjJmN2M2NGIwOGQxMmZjNGZjNDdlMjJkMTp7Il9hdXRoX3VzZXJfaGFzaCI6ImU2ZThjZTI5M2ViY2U5NjRhMDFlMTExMTQ5M2NmNTk5Y2JhODU1ZTQiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxMSJ9	2015-07-10 07:32:48.82681+08
+uuoqimkxkna7zfxxeeu16sloyqy0w39o	YzM0ZWVhNTU2ZTVkM2UzN2Y2YzgyMzhhZGVhOGJhMDAwOTExMDJiNDp7Il9hdXRoX3VzZXJfaGFzaCI6ImMxYTkwNTQyYmUzODJmYzJjY2RhNzM1ZWZmZTc1YjFhM2QxNWY4NDAiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIyNSJ9	2015-08-10 15:57:33.894117+08
+40rp2oruwlxgfzbozy9nct8wm4lhdjms	ZWIwMmQ5YjJkNjhhZWZjYWQ2MzRjMGZkNWI0ZDc2NDU4MDFjOGYxYTp7Il9hdXRoX3VzZXJfaGFzaCI6ImQ2MWU1OWRiOThhZjliNGM1ZDkyNjVhOTBjNTFlMDgxN2VjNGIyMTUiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIyIn0=	2015-07-14 07:49:20.903862+08
+zz3pcccz8mczaetrqzdc5spuxoizzrbr	MWIwYmE0YjhiYzgyMmEzYjM2YjdkMzhiNTFiNzFlNmEzOTliOWRlNzp7Il9hdXRoX3VzZXJfaGFzaCI6IjNlZDM4MDE2MmI5ZDQ1ZWRkNWQwYjNlZWJiN2JiMDc3ZDdmYzBiZTYiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIyMyJ9	2015-07-20 07:58:43.722294+08
+c6hr65ma6mm1yd5cvvjk2uyimw6g0hnw	ODcyYmE4YWI1Y2MzZDcwZWMzMWRjNDU1YWE5NWY5MGM2NjNkZGFmZjp7Il9hdXRoX3VzZXJfaGFzaCI6IjkyMjUyMTk5Y2I2Y2FkNzRjMDBjZGRhZGNiYjYyYTc1NDEzY2IxOGUiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIyNCJ9	2015-07-29 18:04:46.911185+08
+crt09teue6n7g83lehvsoxtdfhngvshc	OTQ3NGExYzEyYzBmMmY2NTk4ZTE5NDE3ODk2NzVlZmU2ODZhMDNkZDp7Il9hdXRoX3VzZXJfaGFzaCI6ImIwNGNhNDAwMzJhZjA3Y2RiZjVkMjUyZWJlYzU2NTc1ZDU4MjVkZWMiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIzIn0=	2015-07-03 17:49:56.979228+08
+mybbuy9az9zmeb1dd9azdf6dsbd6824r	MjkzZjEyNTllMTk2ZDk5ZWJhMzM4MWRiM2I3ODY2NzkxZTAzYjRmZjp7Il9hdXRoX3VzZXJfaGFzaCI6ImY3ZGUzNWY3NjM5MzNkOTcyYWE2NmNmMjc0MDhkZWU3MjVjYTFhNDMiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxNiJ9	2015-07-01 18:00:28.388786+08
+xwqld8gmjtt77hl71b2nwidxewexp576	MDg4ZmM1Y2I0YjVmMWIxYjJmN2M2NGIwOGQxMmZjNGZjNDdlMjJkMTp7Il9hdXRoX3VzZXJfaGFzaCI6ImU2ZThjZTI5M2ViY2U5NjRhMDFlMTExMTQ5M2NmNTk5Y2JhODU1ZTQiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxMSJ9	2015-07-02 07:33:43.868214+08
+exsoyxqi5k4whdgpt7uytv8buy7id9pu	MDg4ZmM1Y2I0YjVmMWIxYjJmN2M2NGIwOGQxMmZjNGZjNDdlMjJkMTp7Il9hdXRoX3VzZXJfaGFzaCI6ImU2ZThjZTI5M2ViY2U5NjRhMDFlMTExMTQ5M2NmNTk5Y2JhODU1ZTQiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxMSJ9	2015-07-15 07:33:24.505275+08
+qn8jifu7mbr6mkz2i4eso1tmmr7hcw4y	MDg4ZmM1Y2I0YjVmMWIxYjJmN2M2NGIwOGQxMmZjNGZjNDdlMjJkMTp7Il9hdXRoX3VzZXJfaGFzaCI6ImU2ZThjZTI5M2ViY2U5NjRhMDFlMTExMTQ5M2NmNTk5Y2JhODU1ZTQiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxMSJ9	2015-06-30 07:49:08.280266+08
+jhr7s58u6pk4yzm49isr2fgqcz5ubf7j	NTVkYzM3Mjc4ZmM4Y2Y1YTg5NzE5OGFmZTdmM2Q4OTEwZThlMTQwOTp7Il9hdXRoX3VzZXJfaGFzaCI6IjA3NGZlOWFkNTk4MDc0OTcyNzU5MmYyYWMxZTVmODE1ZDQ5YmZlMDkiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxNSJ9	2015-08-04 08:48:23.619099+08
+dl3v6s1rpbrbmo9sbub1wxcasmbjo0uh	ZDg3NWI3OTVmYTExYTllYzU4ZjZiMmNkMzQyOGM3N2E2MmExMDEyNDp7Il9hdXRoX3VzZXJfaGFzaCI6IjM3MDA3MGI1N2MwODViNjk3NDc1OTlhOGMwZmY4MTBlYTY1NjZhMmUiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxNCJ9	2015-07-28 17:31:52.831635+08
+9sv4sqh2k6pnwn7hjkvyvri52rhaupzn	NTVkYzM3Mjc4ZmM4Y2Y1YTg5NzE5OGFmZTdmM2Q4OTEwZThlMTQwOTp7Il9hdXRoX3VzZXJfaGFzaCI6IjA3NGZlOWFkNTk4MDc0OTcyNzU5MmYyYWMxZTVmODE1ZDQ5YmZlMDkiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxNSJ9	2015-07-21 08:46:15.595988+08
+a5z03n9e5q5lp30ufnnb8b9r9y9syz5q	ZWIwMmQ5YjJkNjhhZWZjYWQ2MzRjMGZkNWI0ZDc2NDU4MDFjOGYxYTp7Il9hdXRoX3VzZXJfaGFzaCI6ImQ2MWU1OWRiOThhZjliNGM1ZDkyNjVhOTBjNTFlMDgxN2VjNGIyMTUiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIyIn0=	2015-07-16 17:09:17.825253+08
+js4nert3abh6bg4ca1rg3qhwny3wvggy	NzY3MmRhODUwOWE2NmU0ZjMxMDdhZWQwNzlmZTZkZDFkYTI2ODM1Mzp7Il9hdXRoX3VzZXJfaGFzaCI6IjVlMzI4YTZlMTdhZDhhYTg2NjcwYjljZDBkYzExMTM0NDhhMWQ2MDkiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIyMiJ9	2015-07-24 17:34:49.283574+08
+cjnm8y4cec3akvy2xxpt0lnhog5vdd0g	ZTQyNDEwMjc4OWQ3ZTdkMmU2NGQxOTQ2YTcyMzU5MzgzZmIzYWJiODp7Il9hdXRoX3VzZXJfaGFzaCI6IjdiOGRmZGZiZDNjZmRmMmIxOTAxMmExNzQ3YTNlNjRlMWIyYTZiOTYiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxOCJ9	2015-08-05 08:52:01.817987+08
+psgn7ca2ed5ikmbnxhup1rrvyym4jsy0	NWNkYzljMTA5MGIzMDg5YmI2ZTkwZmQxMGQ1MTlhMDNjZTI0ZGFhZjp7Il9hdXRoX3VzZXJfaGFzaCI6ImIwMjcwOTE5M2UzNzljYWM3ZTQ5N2VjMjc3NzFhYTVlOWY2YmFiZjIiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxMiJ9	2015-08-04 08:52:12.04986+08
+o4y9pyakkoj9pt35puf4u0ayju1fmnh4	NzM1MWZlY2NhZThkODE3ZWE2YTRlNDY5NmEyZDkzMTNmNTM4YjRhZTp7Il9hdXRoX3VzZXJfaGFzaCI6ImRlZjExZDE3NGE1MGFmOThjMzI4NzY2ZjVjODY2ODA4ZWZlOWJkZWMiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxOSJ9	2015-07-10 08:26:23.212614+08
+nmezelmumihwyvdiahrij0acsq0us65w	ZTQyNDEwMjc4OWQ3ZTdkMmU2NGQxOTQ2YTcyMzU5MzgzZmIzYWJiODp7Il9hdXRoX3VzZXJfaGFzaCI6IjdiOGRmZGZiZDNjZmRmMmIxOTAxMmExNzQ3YTNlNjRlMWIyYTZiOTYiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxOCJ9	2015-07-21 08:59:53.6285+08
+nk1g97sren1phr3wu3l7pnp8ra1xbu93	NzM1MWZlY2NhZThkODE3ZWE2YTRlNDY5NmEyZDkzMTNmNTM4YjRhZTp7Il9hdXRoX3VzZXJfaGFzaCI6ImRlZjExZDE3NGE1MGFmOThjMzI4NzY2ZjVjODY2ODA4ZWZlOWJkZWMiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxOSJ9	2015-07-27 08:29:11.160033+08
+2zzxvdxytw1prblbzn43dmrr84fl9bz3	YzM0ZWVhNTU2ZTVkM2UzN2Y2YzgyMzhhZGVhOGJhMDAwOTExMDJiNDp7Il9hdXRoX3VzZXJfaGFzaCI6ImMxYTkwNTQyYmUzODJmYzJjY2RhNzM1ZWZmZTc1YjFhM2QxNWY4NDAiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIyNSJ9	2015-07-02 08:02:00.181415+08
+unuw75e488b5a7vbrr1d7m8gcsdxwj4k	YzM0ZWVhNTU2ZTVkM2UzN2Y2YzgyMzhhZGVhOGJhMDAwOTExMDJiNDp7Il9hdXRoX3VzZXJfaGFzaCI6ImMxYTkwNTQyYmUzODJmYzJjY2RhNzM1ZWZmZTc1YjFhM2QxNWY4NDAiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIyNSJ9	2015-07-20 13:41:43.607213+08
+msmog82zhwn56xhuin2opupk8oohhcaz	MWIwYmE0YjhiYzgyMmEzYjM2YjdkMzhiNTFiNzFlNmEzOTliOWRlNzp7Il9hdXRoX3VzZXJfaGFzaCI6IjNlZDM4MDE2MmI5ZDQ1ZWRkNWQwYjNlZWJiN2JiMDc3ZDdmYzBiZTYiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIyMyJ9	2015-08-03 17:00:18.129496+08
+mn3w4mwrb3ioutkcf56ouza7aiejsdia	MDg4ZmM1Y2I0YjVmMWIxYjJmN2M2NGIwOGQxMmZjNGZjNDdlMjJkMTp7Il9hdXRoX3VzZXJfaGFzaCI6ImU2ZThjZTI5M2ViY2U5NjRhMDFlMTExMTQ5M2NmNTk5Y2JhODU1ZTQiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxMSJ9	2015-07-06 16:54:23.444612+08
+nxzjllcgp6cc2fzdqd4ou6quxcuca0gz	YzM0ZWVhNTU2ZTVkM2UzN2Y2YzgyMzhhZGVhOGJhMDAwOTExMDJiNDp7Il9hdXRoX3VzZXJfaGFzaCI6ImMxYTkwNTQyYmUzODJmYzJjY2RhNzM1ZWZmZTc1YjFhM2QxNWY4NDAiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIyNSJ9	2015-07-14 14:26:54.272826+08
+r26cp50a2zfvb8di19xk64t8uok0easv	ZDg3NWI3OTVmYTExYTllYzU4ZjZiMmNkMzQyOGM3N2E2MmExMDEyNDp7Il9hdXRoX3VzZXJfaGFzaCI6IjM3MDA3MGI1N2MwODViNjk3NDc1OTlhOGMwZmY4MTBlYTY1NjZhMmUiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxNCJ9	2015-08-03 17:00:21.168681+08
+2djhuzlbm12swj1jx7szebgqqcvcdag8	MDE3YjkxMDQ2Y2ViZWJlZTRiZWVmNmE2ZWI0NjcyN2IwZWYyNWIzNzp7Il9hdXRoX3VzZXJfaGFzaCI6ImVlMzlhMDBjYjkxMTE2N2ZlZmY4NjhmMmExMDg4MmIwNjI4Mjk1MzgiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIyNiJ9	2015-07-27 09:01:42.08996+08
+yjuqw6jfq8iu8aa4g90n5nzlty00qtnk	NTVkYzM3Mjc4ZmM4Y2Y1YTg5NzE5OGFmZTdmM2Q4OTEwZThlMTQwOTp7Il9hdXRoX3VzZXJfaGFzaCI6IjA3NGZlOWFkNTk4MDc0OTcyNzU5MmYyYWMxZTVmODE1ZDQ5YmZlMDkiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxNSJ9	2015-07-02 09:01:33.717952+08
+88p6bwn2tbygeygxtx330a3aqto72poj	YzM0ZWVhNTU2ZTVkM2UzN2Y2YzgyMzhhZGVhOGJhMDAwOTExMDJiNDp7Il9hdXRoX3VzZXJfaGFzaCI6ImMxYTkwNTQyYmUzODJmYzJjY2RhNzM1ZWZmZTc1YjFhM2QxNWY4NDAiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIyNSJ9	2015-07-29 16:59:08.175428+08
+u3hwcg84rfhyeik7i33m7xw77s01iryb	NzM1MWZlY2NhZThkODE3ZWE2YTRlNDY5NmEyZDkzMTNmNTM4YjRhZTp7Il9hdXRoX3VzZXJfaGFzaCI6ImRlZjExZDE3NGE1MGFmOThjMzI4NzY2ZjVjODY2ODA4ZWZlOWJkZWMiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxOSJ9	2015-07-09 08:37:18.80407+08
+si331hz9l19veckxdkr2wtnzpcgb47km	YzM0ZWVhNTU2ZTVkM2UzN2Y2YzgyMzhhZGVhOGJhMDAwOTExMDJiNDp7Il9hdXRoX3VzZXJfaGFzaCI6ImMxYTkwNTQyYmUzODJmYzJjY2RhNzM1ZWZmZTc1YjFhM2QxNWY4NDAiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIyNSJ9	2015-06-30 09:48:01.208933+08
+0sd2cx7eidljb7cftv01iaqutn1b63gm	ZWIwMmQ5YjJkNjhhZWZjYWQ2MzRjMGZkNWI0ZDc2NDU4MDFjOGYxYTp7Il9hdXRoX3VzZXJfaGFzaCI6ImQ2MWU1OWRiOThhZjliNGM1ZDkyNjVhOTBjNTFlMDgxN2VjNGIyMTUiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIyIn0=	2015-08-04 17:24:25.116154+08
+kepvqt96vqjhedzmbzyqpu6f6gogmaiu	NWYzZDYyMzM1MzJlZDhjYzBmZjk3ZmZhMjYyNjg4MGFmOTE4YmMwMDp7Il9hdXRoX3VzZXJfaGFzaCI6IjRmMmViOWE0MmM3NzBkMzI1N2VhZWI1ZGQ0NTY5Yjc3ZWVmZmZhZTMiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2015-06-25 16:59:10.18633+08
+\.
+
+
+--
+-- TOC entry 2132 (class 0 OID 16536)
+-- Dependencies: 188
+-- Data for Name: register_usercomponent; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY register_usercomponent (user_id, component) FROM stdin;
+2	philshore
+7	admin
+1	philshore
+5	admin
+4	philshore
+3	philshore
+6	admin
+8	remap
+9	remap
+10	remap
+11	remap
+12	remap
+13	remap
+14	remap
+15	remap
+16	remap
+17	remap
+18	remap
+19	remap
+21	remap
+22	remap
+23	remap
+24	remap
+25	remap
+20	deactivated
+26	remap
+28	philshore
+\.
+
+
+--
+-- TOC entry 2135 (class 0 OID 16559)
+-- Dependencies: 191
+-- Data for Name: user_logs_timein; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY user_logs_timein (id, "userId", "dateIn", "timeIn") FROM stdin;
+44	1	2015-06-08	06:19:24
+45	2	2015-06-08	07:08:01
+46	3	2015-06-08	07:29:25
+47	4	2015-06-08	07:50:41
+48	1	2015-06-09	06:14:41
+49	4	2015-06-09	07:06:40
+50	2	2015-06-09	07:12:53
+51	3	2015-06-09	07:28:21
+52	1	2015-06-10	06:42:00
+53	9	2015-06-10	07:40:25
+54	4	2015-06-10	07:48:49
+55	3	2015-06-10	07:49:20
+56	10	2015-06-10	07:50:17
+57	2	2015-06-10	07:52:47
+58	11	2015-06-10	07:53:04
+59	8	2015-06-10	08:30:16
+60	13	2015-06-10	08:36:16
+61	14	2015-06-10	09:05:43
+62	15	2015-06-10	09:05:48
+24	1	2015-06-02	06:49:21
+25	3	2015-06-02	07:09:25
+26	2	2015-06-02	07:48:59
+27	4	2015-06-02	08:09:18
+63	1	2015-06-11	06:11:58
+64	2	2015-06-11	07:19:18
+30	1	2015-06-03	06:15:56
+31	3	2015-06-03	07:12:42
+32	2	2015-06-03	07:53:08
+33	4	2015-06-03	07:53:31
+34	1	2015-06-04	06:18:00
+35	3	2015-06-04	07:33:32
+19	1	2015-06-01	06:18:58
+20	2	2015-06-01	07:40:00
+22	4	2015-06-01	07:59:00
+23	3	2015-06-01	07:55:00
+36	4	2015-06-04	07:47:03
+37	2	2015-06-04	08:09:47
+65	23	2015-06-11	07:23:55
+66	4	2015-06-11	07:29:15
+67	3	2015-06-11	07:38:21
+68	10	2015-06-11	07:43:21
+69	11	2015-06-11	07:57:18
+70	14	2015-06-11	07:57:29
+40	1	2015-06-05	06:18:58
+41	3	2015-06-05	07:02:19
+42	4	2015-06-05	07:41:05
+43	2	2015-06-05	07:50:08
+71	12	2015-06-11	08:13:14
+72	8	2015-06-11	08:19:05
+73	13	2015-06-11	08:25:23
+74	19	2015-06-11	08:35:47
+75	15	2015-06-11	08:36:10
+76	17	2015-06-11	08:41:59
+77	22	2015-06-11	08:48:32
+78	16	2015-06-11	08:59:22
+79	24	2015-06-11	09:53:05
+80	21	2015-06-11	13:43:35
+81	1	2015-06-15	06:17:08
+82	13	2015-06-15	06:28:36
+83	11	2015-06-15	06:54:52
+84	23	2015-06-15	07:26:31
+85	3	2015-06-15	07:35:15
+86	2	2015-06-15	07:35:49
+87	4	2015-06-15	07:47:08
+88	9	2015-06-15	07:52:23
+89	15	2015-06-15	07:52:28
+90	10	2015-06-15	07:57:11
+91	18	2015-06-15	08:02:23
+92	14	2015-06-15	08:10:29
+93	25	2015-06-15	08:33:25
+94	8	2015-06-15	08:36:21
+95	22	2015-06-15	08:50:50
+96	12	2015-06-15	09:03:04
+97	21	2015-06-15	09:25:31
+98	19	2015-06-15	09:50:47
+99	17	2015-06-15	13:26:27
+100	16	2015-06-15	13:38:45
+101	1	2015-06-16	06:17:54
+102	23	2015-06-16	07:31:33
+103	14	2015-06-16	07:33:38
+104	3	2015-06-16	07:42:36
+105	4	2015-06-16	07:48:26
+106	11	2015-06-16	07:49:15
+107	10	2015-06-16	07:49:37
+108	9	2015-06-16	07:51:05
+109	2	2015-06-16	07:51:11
+110	25	2015-06-16	08:01:09
+111	15	2015-06-16	08:04:23
+112	13	2015-06-16	08:07:02
+113	17	2015-06-16	08:36:28
+114	12	2015-06-16	08:45:15
+115	22	2015-06-16	08:47:27
+116	19	2015-06-16	09:22:20
+117	8	2015-06-16	09:26:20
+118	16	2015-06-16	10:09:23
+119	1	2015-06-17	06:19:34
+120	3	2015-06-17	07:15:11
+121	23	2015-06-17	07:31:32
+122	2	2015-06-17	07:43:46
+123	25	2015-06-17	07:55:21
+124	10	2015-06-17	07:55:38
+125	9	2015-06-17	07:56:55
+126	11	2015-06-17	07:58:16
+127	4	2015-06-17	08:00:44
+128	14	2015-06-17	08:06:15
+129	19	2015-06-17	08:07:52
+130	15	2015-06-17	08:11:33
+131	13	2015-06-17	08:13:19
+132	12	2015-06-17	08:32:49
+133	22	2015-06-17	08:55:46
+134	24	2015-06-17	08:58:18
+135	16	2015-06-17	09:02:26
+136	17	2015-06-17	09:08:57
+137	8	2015-06-17	09:24:45
+138	18	2015-06-17	10:50:37
+139	1	2015-06-18	06:15:54
+140	11	2015-06-18	07:33:47
+141	23	2015-06-18	07:41:02
+142	9	2015-06-18	07:43:07
+143	25	2015-06-18	07:44:33
+144	3	2015-06-18	07:48:25
+145	2	2015-06-18	07:49:41
+146	12	2015-06-18	07:51:40
+147	10	2015-06-18	07:52:53
+148	18	2015-06-18	08:00:54
+149	14	2015-06-18	08:02:30
+150	15	2015-06-18	08:03:35
+151	19	2015-06-18	08:11:32
+152	4	2015-06-18	08:25:35
+153	13	2015-06-18	08:26:11
+154	22	2015-06-18	08:52:39
+155	24	2015-06-18	08:56:51
+156	17	2015-06-18	08:57:01
+157	8	2015-06-18	09:02:30
+158	16	2015-06-18	13:14:03
+159	1	2015-06-19	06:17:51
+160	11	2015-06-19	07:38:12
+161	23	2015-06-19	07:40:24
+162	4	2015-06-19	07:42:53
+163	14	2015-06-19	07:45:29
+164	25	2015-06-19	07:50:09
+165	2	2015-06-19	07:51:19
+166	3	2015-06-19	07:57:16
+167	9	2015-06-19	07:59:51
+168	15	2015-06-19	08:08:45
+169	10	2015-06-19	08:13:00
+170	18	2015-06-19	08:16:48
+171	13	2015-06-19	08:23:35
+172	26	2015-06-19	08:37:36
+173	17	2015-06-19	08:53:36
+174	22	2015-06-19	08:56:20
+175	16	2015-06-19	08:57:20
+176	8	2015-06-19	08:58:41
+177	24	2015-06-19	09:09:04
+178	12	2015-06-19	13:22:56
+179	1	2015-06-22	06:19:10
+180	13	2015-06-22	06:32:31
+181	11	2015-06-22	07:01:30
+182	23	2015-06-22	07:22:56
+183	25	2015-06-22	07:46:41
+184	9	2015-06-22	07:47:11
+185	14	2015-06-22	07:47:31
+186	2	2015-06-22	07:51:11
+187	10	2015-06-22	07:52:36
+188	4	2015-06-22	08:08:07
+189	3	2015-06-22	08:11:44
+190	17	2015-06-22	08:17:58
+191	12	2015-06-22	08:21:09
+192	24	2015-06-22	08:25:20
+193	18	2015-06-22	08:28:20
+194	8	2015-06-22	08:57:47
+195	15	2015-06-22	08:59:11
+196	22	2015-06-22	09:03:28
+197	26	2015-06-22	09:33:52
+198	19	2015-06-22	10:10:05
+199	16	2015-06-22	13:11:39
+200	1	2015-06-23	06:23:56
+201	17	2015-06-23	07:38:13
+202	9	2015-06-23	07:49:15
+203	10	2015-06-23	07:51:06
+204	4	2015-06-23	07:53:40
+205	23	2015-06-23	07:54:12
+206	12	2015-06-23	07:54:30
+207	11	2015-06-23	07:55:48
+208	25	2015-06-23	07:56:58
+209	14	2015-06-23	08:02:09
+210	2	2015-06-23	08:15:41
+211	3	2015-06-23	08:26:52
+212	24	2015-06-23	08:30:41
+213	26	2015-06-23	08:32:33
+214	15	2015-06-23	08:44:28
+215	19	2015-06-23	08:57:58
+216	22	2015-06-23	09:01:27
+217	8	2015-06-23	09:06:29
+218	16	2015-06-23	09:10:55
+219	13	2015-06-23	10:17:06
+220	18	2015-06-23	13:03:14
+221	1	2015-06-24	06:19:03
+222	11	2015-06-24	07:30:20
+223	9	2015-06-24	07:36:07
+224	22	2015-06-24	07:42:47
+225	10	2015-06-24	07:44:43
+226	4	2015-06-24	07:46:14
+227	23	2015-06-24	07:46:50
+228	25	2015-06-24	07:48:42
+229	17	2015-06-24	07:50:51
+230	18	2015-06-24	07:56:56
+231	26	2015-06-24	07:58:09
+232	12	2015-06-24	07:59:05
+233	3	2015-06-24	08:03:45
+234	14	2015-06-24	08:07:19
+235	15	2015-06-24	08:46:05
+236	8	2015-06-24	08:46:22
+237	24	2015-06-24	09:09:27
+238	19	2015-06-24	13:00:38
+239	1	2015-06-25	06:16:41
+240	2	2015-06-25	07:15:13
+241	11	2015-06-25	07:30:52
+242	4	2015-06-25	07:56:04
+243	25	2015-06-25	07:56:21
+244	23	2015-06-25	07:56:26
+245	14	2015-06-25	08:00:19
+246	17	2015-06-25	08:00:48
+247	10	2015-06-25	08:02:43
+248	3	2015-06-25	08:09:21
+249	26	2015-06-25	08:23:14
+250	15	2015-06-25	08:32:20
+251	13	2015-06-25	08:36:16
+252	19	2015-06-25	08:37:22
+253	8	2015-06-25	08:38:24
+254	16	2015-06-25	09:07:26
+255	18	2015-06-25	12:57:49
+256	22	2015-06-25	13:38:37
+257	1	2015-06-26	06:16:55
+258	11	2015-06-26	07:32:51
+259	23	2015-06-26	07:33:10
+260	10	2015-06-26	07:43:22
+261	25	2015-06-26	07:52:56
+262	14	2015-06-26	07:58:41
+263	9	2015-06-26	08:00:31
+264	3	2015-06-26	08:14:45
+265	2	2015-06-26	08:15:40
+266	26	2015-06-26	08:22:44
+267	17	2015-06-26	08:24:34
+268	19	2015-06-26	08:26:25
+269	8	2015-06-26	08:28:31
+270	15	2015-06-26	08:44:13
+271	24	2015-06-26	08:47:47
+272	16	2015-06-26	08:56:20
+273	22	2015-06-26	09:12:47
+274	18	2015-06-26	09:35:53
+275	13	2015-06-29	06:24:52
+276	1	2015-06-29	06:25:07
+277	23	2015-06-29	07:06:17
+278	14	2015-06-29	07:42:26
+279	9	2015-06-29	07:49:36
+280	2	2015-06-29	07:57:19
+281	10	2015-06-29	07:58:40
+282	3	2015-06-29	08:07:26
+283	4	2015-06-29	08:07:49
+284	25	2015-06-29	08:26:06
+285	8	2015-06-29	08:38:20
+286	12	2015-06-29	08:43:27
+287	22	2015-06-29	09:01:33
+288	24	2015-06-29	09:19:39
+289	18	2015-06-29	09:54:48
+290	17	2015-06-29	12:39:25
+291	16	2015-06-29	12:55:46
+292	1	2015-06-30	06:20:15
+293	11	2015-06-30	07:27:27
+294	23	2015-06-30	07:40:47
+295	10	2015-06-30	07:49:03
+296	2	2015-06-30	07:49:24
+297	4	2015-06-30	07:55:00
+298	14	2015-06-30	07:55:10
+299	25	2015-06-30	07:55:49
+300	13	2015-06-30	08:01:09
+301	9	2015-06-30	08:02:33
+302	3	2015-06-30	08:15:08
+303	17	2015-06-30	08:24:30
+304	15	2015-06-30	08:48:54
+305	8	2015-06-30	08:48:56
+306	12	2015-06-30	08:54:41
+307	22	2015-06-30	08:59:28
+308	16	2015-06-30	09:04:42
+309	24	2015-06-30	09:25:44
+310	19	2015-06-30	10:27:20
+311	18	2015-06-30	12:49:54
+312	1	2015-07-01	06:21:10
+313	11	2015-07-01	07:33:26
+314	14	2015-07-01	07:36:58
+315	25	2015-07-01	07:43:09
+316	23	2015-07-01	07:47:33
+317	9	2015-07-01	07:55:25
+318	10	2015-07-01	07:59:51
+319	13	2015-07-01	08:00:30
+320	4	2015-07-01	08:06:13
+321	2	2015-07-01	08:13:00
+322	3	2015-07-01	08:15:49
+323	17	2015-07-01	08:28:02
+324	19	2015-07-01	08:52:14
+325	22	2015-07-01	08:55:30
+326	15	2015-07-01	08:56:48
+327	8	2015-07-01	08:58:46
+328	24	2015-07-01	09:22:14
+329	12	2015-07-01	09:22:31
+330	18	2015-07-01	09:25:16
+331	1	2015-07-02	06:18:17
+332	11	2015-07-02	07:35:29
+333	23	2015-07-02	07:38:14
+334	2	2015-07-02	07:41:15
+335	25	2015-07-02	07:46:37
+336	3	2015-07-02	07:55:25
+337	9	2015-07-02	07:56:02
+338	10	2015-07-02	07:58:59
+339	14	2015-07-02	08:01:49
+340	4	2015-07-02	08:19:38
+341	12	2015-07-02	08:46:07
+342	13	2015-07-02	08:46:13
+343	16	2015-07-02	08:49:05
+344	8	2015-07-02	08:50:20
+345	17	2015-07-02	08:58:31
+346	15	2015-07-02	08:58:49
+347	22	2015-07-02	09:00:08
+348	24	2015-07-02	09:12:26
+349	18	2015-07-02	09:52:00
+350	19	2015-07-02	10:12:06
+351	1	2015-07-03	06:20:52
+352	9	2015-07-03	07:19:21
+353	11	2015-07-03	07:34:26
+354	23	2015-07-03	07:38:45
+355	10	2015-07-03	07:46:31
+356	19	2015-07-03	07:56:52
+357	4	2015-07-03	08:01:28
+358	3	2015-07-03	08:02:42
+359	14	2015-07-03	08:08:14
+360	2	2015-07-03	08:17:59
+361	17	2015-07-03	08:31:25
+362	13	2015-07-03	08:34:01
+363	12	2015-07-03	08:54:54
+364	22	2015-07-03	08:57:50
+365	15	2015-07-03	09:04:15
+366	16	2015-07-03	09:40:45
+367	18	2015-07-03	10:08:52
+368	8	2015-07-03	12:56:47
+369	1	2015-07-06	06:16:14
+370	25	2015-07-06	07:25:17
+371	23	2015-07-06	07:27:55
+372	9	2015-07-06	07:51:46
+373	10	2015-07-06	07:58:19
+374	4	2015-07-06	08:00:43
+375	15	2015-07-06	08:42:28
+376	12	2015-07-06	08:48:06
+377	3	2015-07-06	08:52:31
+378	18	2015-07-06	08:55:04
+379	17	2015-07-06	08:58:44
+380	22	2015-07-06	09:05:56
+381	8	2015-07-06	09:06:46
+382	24	2015-07-06	11:50:19
+383	11	2015-07-06	11:55:47
+384	16	2015-07-06	13:08:03
+385	19	2015-07-06	13:16:57
+386	14	2015-07-06	13:24:05
+387	1	2015-07-07	06:13:46
+388	3	2015-07-07	07:26:17
+389	23	2015-07-07	07:42:38
+390	25	2015-07-07	07:44:45
+391	2	2015-07-07	07:50:48
+392	4	2015-07-07	07:55:17
+393	10	2015-07-07	07:57:12
+394	9	2015-07-07	07:59:10
+395	14	2015-07-07	08:04:58
+396	13	2015-07-07	08:24:34
+397	18	2015-07-07	08:26:41
+398	15	2015-07-07	08:46:34
+399	8	2015-07-07	08:59:36
+400	22	2015-07-07	09:03:41
+401	16	2015-07-07	09:28:30
+402	19	2015-07-07	09:29:23
+403	17	2015-07-07	11:26:24
+404	1	2015-07-08	06:16:19
+405	3	2015-07-08	06:54:24
+406	10	2015-07-08	07:30:28
+407	23	2015-07-08	07:31:45
+408	25	2015-07-08	07:49:46
+409	2	2015-07-08	08:00:03
+410	13	2015-07-08	08:11:31
+411	1	2015-07-10	06:16:14
+412	2	2015-07-10	07:48:41
+413	4	2015-07-10	08:29:26
+414	8	2015-07-10	08:52:19
+415	19	2015-07-10	09:00:13
+416	16	2015-07-10	09:35:36
+417	22	2015-07-10	09:35:57
+418	1	2015-07-13	06:26:00
+451	13	2015-07-13	06:29:19
+452	11	2015-07-13	06:49:17
+453	3	2015-07-13	07:16:24
+454	23	2015-07-13	07:45:41
+455	9	2015-07-13	07:52:28
+456	4	2015-07-13	07:59:07
+457	12	2015-07-13	08:05:22
+458	14	2015-07-13	08:10:56
+459	2	2015-07-13	08:16:19
+460	25	2015-07-13	08:21:44
+461	19	2015-07-13	08:29:13
+462	8	2015-07-13	08:50:47
+463	17	2015-07-13	08:52:24
+464	26	2015-07-13	09:01:44
+465	16	2015-07-13	09:17:24
+466	15	2015-07-13	10:44:25
+467	18	2015-07-13	11:07:41
+468	22	2015-07-13	12:25:06
+469	24	2015-07-13	17:11:08
+470	1	2015-07-14	06:18:06
+471	4	2015-07-14	07:35:06
+472	23	2015-07-14	07:41:26
+473	9	2015-07-14	07:50:59
+474	13	2015-07-14	07:53:37
+475	10	2015-07-14	07:54:39
+476	25	2015-07-14	07:54:59
+477	2	2015-07-14	08:00:12
+478	15	2015-07-14	08:00:48
+479	11	2015-07-14	08:02:34
+480	14	2015-07-14	08:03:38
+481	3	2015-07-14	08:24:40
+482	12	2015-07-14	08:48:34
+483	22	2015-07-14	09:00:28
+484	19	2015-07-14	09:10:48
+485	17	2015-07-14	09:14:51
+486	8	2015-07-14	09:18:50
+487	24	2015-07-14	10:50:05
+488	26	2015-07-14	12:35:34
+489	18	2015-07-14	12:39:40
+490	16	2015-07-14	13:08:22
+491	1	2015-07-15	06:23:53
+492	2	2015-07-15	07:12:28
+493	25	2015-07-15	07:35:46
+494	23	2015-07-15	07:40:36
+495	10	2015-07-15	07:41:31
+496	4	2015-07-15	07:51:01
+497	14	2015-07-15	08:02:06
+498	9	2015-07-15	08:08:46
+499	3	2015-07-15	08:11:39
+500	11	2015-07-15	08:12:33
+501	8	2015-07-15	08:42:39
+502	13	2015-07-15	08:45:25
+503	26	2015-07-15	08:49:33
+504	15	2015-07-15	08:51:42
+505	16	2015-07-15	08:56:42
+506	12	2015-07-15	08:58:16
+507	19	2015-07-15	09:00:59
+508	24	2015-07-15	09:02:01
+509	17	2015-07-15	09:02:04
+510	22	2015-07-15	09:05:19
+511	2	2015-07-16	06:33:23
+512	1	2015-07-16	06:33:33
+513	11	2015-07-16	07:20:20
+514	23	2015-07-16	07:45:43
+515	4	2015-07-16	07:53:18
+516	10	2015-07-16	07:53:44
+517	25	2015-07-16	07:56:16
+518	9	2015-07-16	07:56:36
+519	14	2015-07-16	08:13:22
+520	8	2015-07-16	08:13:52
+521	18	2015-07-16	08:23:37
+522	3	2015-07-16	08:27:13
+523	12	2015-07-16	08:28:25
+524	26	2015-07-16	08:46:45
+525	13	2015-07-16	08:56:29
+526	22	2015-07-16	09:05:56
+527	24	2015-07-16	09:56:05
+528	15	2015-07-16	13:18:41
+529	13	2015-07-20	06:22:32
+530	1	2015-07-20	06:23:14
+531	2	2015-07-20	07:55:04
+532	23	2015-07-20	07:55:09
+533	3	2015-07-20	07:56:59
+534	14	2015-07-20	07:57:02
+535	8	2015-07-20	08:17:26
+536	17	2015-07-20	08:35:07
+537	26	2015-07-20	08:54:39
+538	18	2015-07-20	08:59:06
+539	22	2015-07-20	09:01:50
+540	24	2015-07-20	09:46:57
+541	12	2015-07-20	12:57:49
+542	1	2015-07-21	06:20:44
+543	23	2015-07-21	07:25:45
+544	10	2015-07-21	07:51:00
+545	14	2015-07-21	07:53:45
+546	9	2015-07-21	07:55:11
+547	2	2015-07-21	08:01:12
+548	3	2015-07-21	08:08:38
+549	18	2015-07-21	08:13:56
+550	13	2015-07-21	08:41:56
+551	12	2015-07-21	08:44:35
+552	17	2015-07-21	08:45:09
+553	15	2015-07-21	08:48:32
+554	8	2015-07-21	08:52:05
+555	26	2015-07-21	09:03:46
+556	22	2015-07-21	09:41:05
+557	19	2015-07-21	10:08:53
+558	1	2015-07-22	06:14:35
+559	3	2015-07-22	06:48:36
+560	10	2015-07-22	07:36:01
+561	14	2015-07-22	07:45:22
+562	23	2015-07-22	07:48:48
+563	18	2015-07-22	07:53:35
+564	9	2015-07-22	07:57:02
+565	2	2015-07-22	08:18:54
+566	8	2015-07-22	08:25:20
+567	13	2015-07-22	08:32:44
+568	26	2015-07-22	08:47:58
+569	15	2015-07-22	08:51:50
+570	24	2015-07-22	08:58:02
+571	12	2015-07-22	09:00:25
+572	22	2015-07-22	09:01:41
+573	16	2015-07-22	09:06:17
+574	17	2015-07-22	09:09:45
+575	1	2015-07-23	06:09:15
+576	10	2015-07-23	06:17:51
+577	14	2015-07-23	08:37:46
+578	12	2015-07-23	08:41:43
+579	19	2015-07-23	08:45:11
+580	15	2015-07-23	08:51:08
+581	8	2015-07-23	08:56:30
+582	18	2015-07-23	09:02:25
+583	9	2015-07-23	09:25:51
+584	1	2015-07-27	06:11:01
+585	18	2015-07-27	06:51:07
+586	11	2015-07-27	07:00:43
+587	13	2015-07-27	07:03:46
+588	9	2015-07-27	07:38:31
+589	23	2015-07-27	07:39:06
+590	10	2015-07-27	07:46:10
+591	14	2015-07-27	07:52:30
+592	4	2015-07-27	08:00:25
+593	25	2015-07-27	08:06:51
+594	15	2015-07-27	08:51:10
+595	26	2015-07-27	08:53:17
+596	22	2015-07-27	09:16:54
+597	8	2015-07-27	09:20:50
+598	19	2015-07-27	09:24:32
+599	1	2015-07-28	06:24:04
+\.
+
+
+--
+-- TOC entry 2166 (class 0 OID 0)
+-- Dependencies: 190
+-- Name: user_logs_timein_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('user_logs_timein_id_seq', 599, true);
+
+
+--
+-- TOC entry 2137 (class 0 OID 16567)
+-- Dependencies: 193
+-- Data for Name: user_logs_timeout; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY user_logs_timeout (id, "userId", "dateOut", "timeOut") FROM stdin;
+10	1	2015-06-01	16:19:00
+11	2	2015-06-01	16:58:53
+13	4	2015-06-01	17:04:02
+14	3	2015-06-01	17:05:12
+15	2	2015-06-02	16:53:25
+16	1	2015-06-02	16:53:58
+17	3	2015-06-02	16:57:38
+18	4	2015-06-02	17:11:22
+19	1	2015-06-03	16:42:23
+20	4	2015-06-03	16:54:55
+21	2	2015-06-03	17:02:34
+22	3	2015-06-03	17:05:51
+121	17	2015-06-17	18:00:19
+122	8	2015-06-17	18:00:30
+123	18	2015-06-17	18:00:43
+25	4	2015-06-04	17:05:25
+26	3	2015-06-04	17:08:47
+27	2	2015-06-04	17:10:50
+28	1	2015-06-04	17:11:53
+29	1	2015-06-05	16:45:19
+30	4	2015-06-05	17:03:42
+31	2	2015-06-05	17:05:35
+32	3	2015-06-05	17:06:39
+33	4	2015-06-08	16:51:31
+34	3	2015-06-08	17:02:42
+35	1	2015-06-08	17:09:50
+36	2	2015-06-08	18:05:01
+37	4	2015-06-09	17:15:16
+38	3	2015-06-09	17:15:21
+39	2	2015-06-09	17:15:58
+40	1	2015-06-09	17:34:40
+41	4	2015-06-10	16:52:16
+43	11	2015-06-10	17:02:21
+124	22	2015-06-17	18:00:44
+125	3	2015-06-17	18:00:48
+126	3	2015-06-18	16:51:57
+44	9	2015-06-10	17:06:09
+127	1	2015-06-18	16:52:23
+42	10	2015-06-10	17:01:40
+46	14	2015-06-10	17:25:31
+47	3	2015-06-10	17:30:26
+48	4	2015-06-11	16:34:15
+50	2	2015-06-11	16:55:10
+128	12	2015-06-18	17:00:05
+129	10	2015-06-18	17:00:31
+130	2	2015-06-18	17:00:56
+131	11	2015-06-18	17:01:22
+51	10	2015-06-11	17:01:20
+52	11	2015-06-11	17:01:44
+53	3	2015-06-11	17:02:09
+54	14	2015-06-11	17:02:39
+55	23	2015-06-11	17:03:40
+56	12	2015-06-11	17:15:10
+57	8	2015-06-11	17:25:59
+58	13	2015-06-11	17:29:48
+59	15	2015-06-11	17:39:11
+60	19	2015-06-11	17:42:00
+61	17	2015-06-11	17:42:46
+62	24	2015-06-11	17:53:54
+63	22	2015-06-11	17:53:54
+64	16	2015-06-11	18:02:27
+65	21	2015-06-11	18:04:52
+132	25	2015-06-18	17:01:52
+49	1	2015-06-11	16:49:44
+133	23	2015-06-18	17:03:35
+134	15	2015-06-18	17:04:14
+135	19	2015-06-18	17:12:18
+136	9	2015-06-18	17:17:00
+137	4	2015-06-18	17:25:56
+138	14	2015-06-18	17:29:30
+45	1	2015-06-10	17:00:54
+66	4	2015-06-15	17:00:09
+68	11	2015-06-15	17:00:11
+70	10	2015-06-15	17:00:14
+71	9	2015-06-15	17:01:19
+72	23	2015-06-15	17:01:29
+73	13	2015-06-15	17:01:47
+74	1	2015-06-15	17:03:20
+75	2	2015-06-15	17:04:04
+76	15	2015-06-15	17:05:57
+77	18	2015-06-15	17:08:31
+78	19	2015-06-15	17:10:38
+79	14	2015-06-15	17:11:44
+80	25	2015-06-15	17:34:27
+81	8	2015-06-15	17:36:29
+82	3	2015-06-15	17:40:51
+83	12	2015-06-15	18:00:32
+84	16	2015-06-15	18:01:15
+85	21	2015-06-15	18:01:55
+86	17	2015-06-15	18:33:02
+87	22	2015-06-15	18:33:20
+88	1	2015-06-16	16:44:24
+89	14	2015-06-16	16:52:44
+90	2	2015-06-16	16:54:14
+91	4	2015-06-16	16:55:52
+92	9	2015-06-16	17:00:08
+93	10	2015-06-16	17:00:14
+94	23	2015-06-16	17:01:12
+95	25	2015-06-16	17:02:00
+96	11	2015-06-16	17:02:23
+97	15	2015-06-16	17:07:47
+98	13	2015-06-16	17:18:05
+99	19	2015-06-16	17:31:00
+100	12	2015-06-16	17:45:34
+101	22	2015-06-16	17:46:07
+102	17	2015-06-16	17:46:46
+103	3	2015-06-16	17:58:31
+104	8	2015-06-16	18:01:15
+105	16	2015-06-16	18:01:23
+106	1	2015-06-17	16:42:57
+107	10	2015-06-17	17:00:13
+108	25	2015-06-17	17:00:41
+109	11	2015-06-17	17:01:28
+110	23	2015-06-17	17:01:31
+111	4	2015-06-17	17:04:04
+112	2	2015-06-17	17:04:36
+113	9	2015-06-17	17:05:12
+114	19	2015-06-17	17:15:27
+115	15	2015-06-17	17:19:30
+116	24	2015-06-17	17:28:36
+117	14	2015-06-17	17:30:32
+118	13	2015-06-17	17:31:39
+119	12	2015-06-17	17:35:22
+120	16	2015-06-17	17:59:02
+139	24	2015-06-18	17:57:31
+140	16	2015-06-18	18:02:46
+141	17	2015-06-18	18:18:41
+142	8	2015-06-18	18:18:44
+143	13	2015-06-18	18:18:44
+144	18	2015-06-18	18:19:14
+145	22	2015-06-18	18:20:50
+146	17	2015-06-19	16:18:24
+147	4	2015-06-19	16:43:17
+148	1	2015-06-19	16:53:03
+149	2	2015-06-19	16:56:51
+150	11	2015-06-19	17:00:05
+151	25	2015-06-19	17:00:08
+159	14	2015-06-19	17:01:57
+160	23	2015-06-19	17:04:00
+161	9	2015-06-19	17:05:21
+162	16	2015-06-19	17:08:58
+163	15	2015-06-19	17:09:28
+164	26	2015-06-19	17:11:31
+165	10	2015-06-19	17:13:11
+166	18	2015-06-19	17:17:33
+167	13	2015-06-19	17:56:27
+168	3	2015-06-19	17:59:18
+169	8	2015-06-19	18:02:28
+170	12	2015-06-19	18:02:30
+171	22	2015-06-19	18:03:33
+172	24	2015-06-19	18:03:51
+173	1	2015-06-22	16:58:51
+174	11	2015-06-22	17:00:05
+175	25	2015-06-22	17:00:20
+176	23	2015-06-22	17:00:40
+177	10	2015-06-22	17:00:43
+178	9	2015-06-22	17:01:22
+179	2	2015-06-22	17:07:09
+180	4	2015-06-22	17:11:22
+181	13	2015-06-22	17:17:46
+182	14	2015-06-22	17:20:35
+183	18	2015-06-22	17:29:38
+184	24	2015-06-22	17:32:44
+185	3	2015-06-22	17:52:15
+186	8	2015-06-22	18:00:17
+187	16	2015-06-22	18:01:26
+188	17	2015-06-22	18:01:31
+189	15	2015-06-22	18:01:33
+190	26	2015-06-22	18:01:46
+191	19	2015-06-22	18:03:54
+192	22	2015-06-22	18:04:30
+193	2	2015-06-23	16:20:00
+194	11	2015-06-23	17:00:05
+195	17	2015-06-23	17:00:21
+196	10	2015-06-23	17:00:36
+197	23	2015-06-23	17:00:42
+198	25	2015-06-23	17:01:06
+199	9	2015-06-23	17:02:00
+200	1	2015-06-23	17:12:03
+201	14	2015-06-23	17:32:58
+202	26	2015-06-23	17:37:10
+203	13	2015-06-23	17:38:03
+204	24	2015-06-23	17:40:15
+205	18	2015-06-23	17:46:43
+206	15	2015-06-23	17:47:50
+207	19	2015-06-23	17:58:10
+208	16	2015-06-23	18:00:23
+209	8	2015-06-23	18:00:37
+210	22	2015-06-23	18:03:24
+211	3	2015-06-23	18:07:15
+212	22	2015-06-24	07:42:56
+213	4	2015-06-24	16:48:04
+214	23	2015-06-24	17:00:17
+215	10	2015-06-24	17:00:23
+216	11	2015-06-24	17:00:30
+217	25	2015-06-24	17:00:44
+218	17	2015-06-24	17:01:17
+219	26	2015-06-24	17:03:25
+220	18	2015-06-24	17:06:50
+221	19	2015-06-24	17:07:55
+222	1	2015-06-24	17:08:09
+223	14	2015-06-24	17:08:41
+224	9	2015-06-24	17:13:38
+225	24	2015-06-24	17:40:50
+226	15	2015-06-24	17:47:19
+227	8	2015-06-24	17:47:19
+228	3	2015-06-24	17:49:34
+229	11	2015-06-25	17:00:05
+230	23	2015-06-25	17:00:43
+231	25	2015-06-25	17:01:18
+232	26	2015-06-25	17:03:54
+233	1	2015-06-25	17:07:24
+234	13	2015-06-25	17:16:05
+235	10	2015-06-25	17:22:59
+236	2	2015-06-25	17:25:59
+237	3	2015-06-25	17:29:56
+238	14	2015-06-25	17:30:14
+239	18	2015-06-25	17:31:46
+240	15	2015-06-25	17:34:19
+241	17	2015-06-25	17:38:37
+242	19	2015-06-25	17:40:56
+243	22	2015-06-25	17:52:35
+244	8	2015-06-25	17:57:27
+245	16	2015-06-25	18:00:17
+246	1	2015-06-26	16:58:42
+247	11	2015-06-26	17:00:05
+248	23	2015-06-26	17:00:16
+249	25	2015-06-26	17:00:27
+250	10	2015-06-26	17:03:39
+251	9	2015-06-26	17:07:50
+252	2	2015-06-26	17:19:43
+253	26	2015-06-26	17:29:40
+254	8	2015-06-26	17:29:59
+255	14	2015-06-26	17:31:14
+256	19	2015-06-26	17:31:27
+257	17	2015-06-26	17:31:45
+258	18	2015-06-26	17:35:54
+259	15	2015-06-26	17:46:13
+260	3	2015-06-26	17:46:55
+261	24	2015-06-26	17:48:17
+262	22	2015-06-26	17:54:17
+263	16	2015-06-26	17:56:22
+264	10	2015-06-29	17:00:09
+265	23	2015-06-29	17:00:42
+266	9	2015-06-29	17:01:58
+267	13	2015-06-29	17:05:52
+268	2	2015-06-29	17:06:59
+269	1	2015-06-29	17:07:21
+270	4	2015-06-29	17:10:51
+271	14	2015-06-29	17:14:59
+272	25	2015-06-29	17:26:09
+273	3	2015-06-29	17:46:47
+274	24	2015-06-29	18:00:14
+275	17	2015-06-29	18:01:55
+276	22	2015-06-29	18:04:16
+277	16	2015-06-29	18:05:17
+278	18	2015-06-29	18:06:21
+279	8	2015-06-29	18:14:28
+280	12	2015-06-29	18:15:33
+281	4	2015-06-30	16:59:54
+282	10	2015-06-30	17:00:12
+283	23	2015-06-30	17:00:29
+284	25	2015-06-30	17:00:41
+285	1	2015-06-30	17:02:45
+286	2	2015-06-30	17:06:11
+287	9	2015-06-30	17:09:42
+288	11	2015-06-30	17:10:54
+289	14	2015-06-30	17:22:51
+290	13	2015-06-30	17:27:00
+291	24	2015-06-30	17:31:44
+292	17	2015-06-30	17:35:43
+293	18	2015-06-30	17:37:54
+294	8	2015-06-30	17:55:02
+295	12	2015-06-30	17:55:24
+296	15	2015-06-30	17:59:41
+297	16	2015-06-30	18:00:12
+298	19	2015-06-30	18:00:59
+299	3	2015-06-30	18:01:13
+300	22	2015-06-30	18:01:51
+301	1	2015-07-01	17:00:35
+302	23	2015-07-01	17:01:20
+303	10	2015-07-01	17:01:24
+304	25	2015-07-01	17:02:39
+305	11	2015-07-01	17:03:37
+306	4	2015-07-01	17:15:15
+307	2	2015-07-01	17:15:26
+308	14	2015-07-01	17:17:35
+309	3	2015-07-01	18:00:50
+310	9	2015-07-01	18:01:23
+311	13	2015-07-01	18:29:01
+312	18	2015-07-01	18:30:57
+313	24	2015-07-01	18:31:23
+314	8	2015-07-01	18:31:27
+315	22	2015-07-01	18:31:45
+316	12	2015-07-01	18:31:46
+317	17	2015-07-01	18:32:44
+318	19	2015-07-01	18:32:44
+319	15	2015-07-01	18:33:22
+320	12	2015-07-02	14:07:46
+321	11	2015-07-02	14:08:05
+322	1	2015-07-02	16:59:57
+323	10	2015-07-02	17:00:19
+324	25	2015-07-02	17:00:38
+325	23	2015-07-02	17:01:09
+326	24	2015-07-02	17:01:13
+327	2	2015-07-02	17:09:22
+328	4	2015-07-02	17:19:45
+329	9	2015-07-02	17:20:03
+330	14	2015-07-02	17:21:14
+331	19	2015-07-02	17:38:10
+332	13	2015-07-02	17:42:24
+333	16	2015-07-02	17:51:44
+334	8	2015-07-02	17:52:10
+335	15	2015-07-02	18:00:20
+336	18	2015-07-02	18:00:31
+337	22	2015-07-02	18:00:38
+338	3	2015-07-02	18:02:31
+339	19	2015-07-03	16:11:03
+340	10	2015-07-03	17:00:21
+341	23	2015-07-03	17:00:54
+342	4	2015-07-03	17:01:54
+343	9	2015-07-03	17:03:38
+344	1	2015-07-03	17:04:08
+346	11	2015-07-03	17:04:54
+347	8	2015-07-03	17:09:31
+348	2	2015-07-03	17:18:35
+349	14	2015-07-03	17:27:06
+350	17	2015-07-03	17:34:20
+351	15	2015-07-03	17:41:39
+352	3	2015-07-03	17:47:14
+353	13	2015-07-03	17:54:11
+354	12	2015-07-03	17:55:42
+355	22	2015-07-03	17:59:12
+356	16	2015-07-03	18:00:18
+357	18	2015-07-03	18:00:39
+358	14	2015-07-07	12:24:03
+359	4	2015-07-07	16:59:35
+360	10	2015-07-07	17:00:24
+361	1	2015-07-07	17:01:17
+362	2	2015-07-07	17:01:54
+363	25	2015-07-07	17:03:42
+364	9	2015-07-07	17:05:53
+365	18	2015-07-07	17:10:58
+366	23	2015-07-07	17:12:16
+367	19	2015-07-07	17:18:53
+368	3	2015-07-07	17:43:36
+369	15	2015-07-07	17:47:31
+370	8	2015-07-07	18:00:52
+371	16	2015-07-07	18:01:17
+372	22	2015-07-07	18:03:04
+373	13	2015-07-07	18:03:15
+374	17	2015-07-07	18:04:20
+375	3	2015-07-08	08:14:18
+376	1	2015-07-10	17:04:07
+377	16	2015-07-10	17:06:02
+378	2	2015-07-10	17:10:06
+379	4	2015-07-10	17:32:06
+380	8	2015-07-10	17:39:12
+381	4	2015-07-13	17:00:19
+382	23	2015-07-13	17:00:23
+383	11	2015-07-13	17:03:58
+384	9	2015-07-13	17:04:26
+385	12	2015-07-13	17:10:47
+386	24	2015-07-13	17:11:11
+387	1	2015-07-13	17:11:34
+388	13	2015-07-13	17:16:23
+389	22	2015-07-13	17:17:49
+390	25	2015-07-13	17:21:12
+391	2	2015-07-13	17:25:19
+392	19	2015-07-13	17:31:43
+393	14	2015-07-13	17:40:16
+394	15	2015-07-13	17:45:33
+395	17	2015-07-13	17:53:35
+396	8	2015-07-13	17:58:09
+397	18	2015-07-13	18:00:18
+398	26	2015-07-13	18:00:32
+399	16	2015-07-13	18:00:58
+400	3	2015-07-13	18:05:17
+401	4	2015-07-14	16:38:05
+402	1	2015-07-14	16:57:05
+403	10	2015-07-14	17:00:12
+404	11	2015-07-14	17:00:18
+407	25	2015-07-14	17:00:50
+408	9	2015-07-14	17:02:06
+409	2	2015-07-14	17:04:49
+410	13	2015-07-14	17:15:07
+411	15	2015-07-14	17:15:58
+412	23	2015-07-14	17:21:58
+413	14	2015-07-14	17:31:55
+414	24	2015-07-14	17:36:39
+415	12	2015-07-14	17:51:33
+416	3	2015-07-14	18:01:13
+417	8	2015-07-14	18:01:13
+418	26	2015-07-14	18:01:31
+419	17	2015-07-14	18:01:36
+420	22	2015-07-14	18:02:26
+421	16	2015-07-14	18:02:45
+422	19	2015-07-14	18:03:05
+423	23	2015-07-15	17:01:23
+424	1	2015-07-15	17:01:38
+425	2	2015-07-15	17:02:11
+426	10	2015-07-15	17:12:51
+427	25	2015-07-15	17:14:33
+428	11	2015-07-15	17:14:59
+429	14	2015-07-15	17:19:26
+430	19	2015-07-15	17:21:41
+431	9	2015-07-15	17:28:37
+432	13	2015-07-15	17:43:22
+433	3	2015-07-15	17:47:51
+434	15	2015-07-15	17:52:03
+435	26	2015-07-15	17:53:36
+436	8	2015-07-15	17:58:39
+437	12	2015-07-15	17:58:41
+438	17	2015-07-15	18:00:00
+439	22	2015-07-15	18:00:15
+440	24	2015-07-15	18:05:29
+441	4	2015-07-16	17:00:29
+442	11	2015-07-16	17:00:34
+443	23	2015-07-16	17:00:50
+444	1	2015-07-16	17:01:08
+445	25	2015-07-16	17:03:49
+446	26	2015-07-16	17:05:28
+447	9	2015-07-16	17:07:14
+448	24	2015-07-16	17:08:37
+449	8	2015-07-16	17:14:39
+450	2	2015-07-16	17:22:51
+451	15	2015-07-16	17:22:54
+452	18	2015-07-16	17:24:27
+453	12	2015-07-16	17:29:18
+454	10	2015-07-16	17:40:32
+455	14	2015-07-16	17:45:01
+456	22	2015-07-16	18:00:35
+457	3	2015-07-16	18:06:24
+458	1	2015-07-20	16:44:35
+459	2	2015-07-20	16:55:36
+460	3	2015-07-20	16:58:14
+461	23	2015-07-20	17:00:25
+462	13	2015-07-20	17:16:02
+463	8	2015-07-20	17:24:16
+464	12	2015-07-20	17:24:20
+465	14	2015-07-20	17:45:18
+466	17	2015-07-20	17:48:23
+467	26	2015-07-20	17:57:39
+468	18	2015-07-20	17:59:31
+469	24	2015-07-20	18:00:02
+470	22	2015-07-20	18:00:09
+471	10	2015-07-21	17:00:35
+472	23	2015-07-21	17:02:39
+473	9	2015-07-21	17:06:08
+474	22	2015-07-21	17:09:28
+475	14	2015-07-21	17:12:25
+478	18	2015-07-21	17:17:32
+479	1	2015-07-21	17:20:56
+480	2	2015-07-21	17:24:31
+481	17	2015-07-21	17:50:57
+482	15	2015-07-21	17:51:41
+483	3	2015-07-21	17:51:41
+484	13	2015-07-21	17:52:07
+485	8	2015-07-21	17:53:03
+486	26	2015-07-21	17:54:49
+487	12	2015-07-21	17:55:12
+488	9	2015-07-22	09:15:16
+489	1	2015-07-23	06:10:48
+490	9	2015-07-23	17:24:26
+491	19	2015-07-23	17:48:46
+492	15	2015-07-23	17:51:28
+493	12	2015-07-23	17:51:43
+494	9	2015-07-27	15:54:04
+495	25	2015-07-27	16:06:28
+496	18	2015-07-27	16:07:22
+497	11	2015-07-27	16:10:46
+498	19	2015-07-27	16:13:43
+499	4	2015-07-27	17:08:22
+500	1	2015-07-27	17:11:51
+\.
+
+
+--
+-- TOC entry 2167 (class 0 OID 0)
+-- Dependencies: 192
+-- Name: user_logs_timeout_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('user_logs_timeout_id_seq', 500, true);
+
+
+--
+-- TOC entry 1955 (class 2606 OID 16425)
+-- Name: auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- TOC entry 1961 (class 2606 OID 16435)
+-- Name: auth_group_permissions_group_id_permission_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_permission_id_key UNIQUE (group_id, permission_id);
+
+
+--
+-- TOC entry 1963 (class 2606 OID 16433)
+-- Name: auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1957 (class 2606 OID 16423)
+-- Name: auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1950 (class 2606 OID 16415)
+-- Name: auth_permission_content_type_id_codename_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_codename_key UNIQUE (content_type_id, codename);
+
+
+--
+-- TOC entry 1952 (class 2606 OID 16413)
+-- Name: auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1965 (class 2606 OID 16535)
+-- Name: auth_user_email_15154ca621be1b41_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user
+    ADD CONSTRAINT auth_user_email_15154ca621be1b41_uniq UNIQUE (email);
+
+
+--
+-- TOC entry 1974 (class 2606 OID 16453)
+-- Name: auth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1976 (class 2606 OID 16455)
+-- Name: auth_user_groups_user_id_group_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_group_id_key UNIQUE (user_id, group_id);
+
+
+--
+-- TOC entry 1967 (class 2606 OID 16443)
+-- Name: auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user
+    ADD CONSTRAINT auth_user_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1980 (class 2606 OID 16463)
+-- Name: auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1982 (class 2606 OID 16465)
+-- Name: auth_user_user_permissions_user_id_permission_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_permission_id_key UNIQUE (user_id, permission_id);
+
+
+--
+-- TOC entry 1970 (class 2606 OID 16445)
+-- Name: auth_user_username_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user
+    ADD CONSTRAINT auth_user_username_key UNIQUE (username);
+
+
+--
+-- TOC entry 1986 (class 2606 OID 16521)
+-- Name: django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1945 (class 2606 OID 16405)
+-- Name: django_content_type_app_label_45f3b1d93ec8c61c_uniq; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY django_content_type
+    ADD CONSTRAINT django_content_type_app_label_45f3b1d93ec8c61c_uniq UNIQUE (app_label, model);
+
+
+--
+-- TOC entry 1947 (class 2606 OID 16403)
+-- Name: django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1943 (class 2606 OID 16395)
+-- Name: django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY django_migrations
+    ADD CONSTRAINT django_migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1991 (class 2606 OID 16553)
+-- Name: django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- TOC entry 1988 (class 2606 OID 16540)
+-- Name: register_usercomponent_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY register_usercomponent
+    ADD CONSTRAINT register_usercomponent_pkey PRIMARY KEY (user_id);
+
+
+--
+-- TOC entry 1994 (class 2606 OID 16564)
+-- Name: user_logs_timein_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY user_logs_timein
+    ADD CONSTRAINT user_logs_timein_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1996 (class 2606 OID 16572)
+-- Name: user_logs_timeout_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY user_logs_timeout
+    ADD CONSTRAINT user_logs_timeout_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1953 (class 1259 OID 16472)
+-- Name: auth_group_name_253ae2a6331666e8_like; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_group_name_253ae2a6331666e8_like ON auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- TOC entry 1958 (class 1259 OID 16483)
+-- Name: auth_group_permissions_0e939a4f; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_group_permissions_0e939a4f ON auth_group_permissions USING btree (group_id);
+
+
+--
+-- TOC entry 1959 (class 1259 OID 16484)
+-- Name: auth_group_permissions_8373b171; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_group_permissions_8373b171 ON auth_group_permissions USING btree (permission_id);
+
+
+--
+-- TOC entry 1948 (class 1259 OID 16471)
+-- Name: auth_permission_417f1b1c; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_permission_417f1b1c ON auth_permission USING btree (content_type_id);
+
+
+--
+-- TOC entry 1971 (class 1259 OID 16497)
+-- Name: auth_user_groups_0e939a4f; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_user_groups_0e939a4f ON auth_user_groups USING btree (group_id);
+
+
+--
+-- TOC entry 1972 (class 1259 OID 16496)
+-- Name: auth_user_groups_e8701ad4; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_user_groups_e8701ad4 ON auth_user_groups USING btree (user_id);
+
+
+--
+-- TOC entry 1977 (class 1259 OID 16509)
+-- Name: auth_user_user_permissions_8373b171; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_user_user_permissions_8373b171 ON auth_user_user_permissions USING btree (permission_id);
+
+
+--
+-- TOC entry 1978 (class 1259 OID 16508)
+-- Name: auth_user_user_permissions_e8701ad4; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_user_user_permissions_e8701ad4 ON auth_user_user_permissions USING btree (user_id);
+
+
+--
+-- TOC entry 1968 (class 1259 OID 16485)
+-- Name: auth_user_username_51b3b110094b8aae_like; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_user_username_51b3b110094b8aae_like ON auth_user USING btree (username varchar_pattern_ops);
+
+
+--
+-- TOC entry 1983 (class 1259 OID 16532)
+-- Name: django_admin_log_417f1b1c; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX django_admin_log_417f1b1c ON django_admin_log USING btree (content_type_id);
+
+
+--
+-- TOC entry 1984 (class 1259 OID 16533)
+-- Name: django_admin_log_e8701ad4; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX django_admin_log_e8701ad4 ON django_admin_log USING btree (user_id);
+
+
+--
+-- TOC entry 1989 (class 1259 OID 16554)
+-- Name: django_session_de54fa62; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX django_session_de54fa62 ON django_session USING btree (expire_date);
+
+
+--
+-- TOC entry 1992 (class 1259 OID 16555)
+-- Name: django_session_session_key_461cfeaa630ca218_like; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX django_session_session_key_461cfeaa630ca218_like ON django_session USING btree (session_key varchar_pattern_ops);
+
+
+--
+-- TOC entry 1997 (class 2606 OID 16466)
+-- Name: auth_content_type_id_508cf46651277a81_fk_django_content_type_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_content_type_id_508cf46651277a81_fk_django_content_type_id FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 1998 (class 2606 OID 16473)
+-- Name: auth_group_permissio_group_id_689710a9a73b7457_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissio_group_id_689710a9a73b7457_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 1999 (class 2606 OID 16478)
+-- Name: auth_group_permission_id_1f49ccbbdc69d2fc_fk_auth_permission_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permission_id_1f49ccbbdc69d2fc_fk_auth_permission_id FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 2003 (class 2606 OID 16503)
+-- Name: auth_user__permission_id_384b62483d7071f0_fk_auth_permission_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user__permission_id_384b62483d7071f0_fk_auth_permission_id FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 2001 (class 2606 OID 16491)
+-- Name: auth_user_groups_group_id_33ac548dcf5f8e37_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_group_id_33ac548dcf5f8e37_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 2000 (class 2606 OID 16486)
+-- Name: auth_user_groups_user_id_4b5ed4ffdb8fd9b0_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_4b5ed4ffdb8fd9b0_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 2002 (class 2606 OID 16498)
+-- Name: auth_user_user_permiss_user_id_7f0938558328534a_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permiss_user_id_7f0938558328534a_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 2004 (class 2606 OID 16522)
+-- Name: djan_content_type_id_697914295151027a_fk_django_content_type_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT djan_content_type_id_697914295151027a_fk_django_content_type_id FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 2005 (class 2606 OID 16527)
+-- Name: django_admin_log_user_id_52fdd58701c5f563_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_52fdd58701c5f563_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 2006 (class 2606 OID 16541)
+-- Name: register_usercomponent_user_id_4f0087cd7459d60f_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY register_usercomponent
+    ADD CONSTRAINT register_usercomponent_user_id_4f0087cd7459d60f_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- TOC entry 2144 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2015-07-28 07:04:51 PHT
+
+--
+-- PostgreSQL database dump complete
+--
+

@@ -82,8 +82,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'agstlogger',
         'USER': 'postgres',
-        'PASSWORD': 'agstSERVER',
-        'HOST': '10.33.88.101',
+        'PASSWORD': 'tidaldev',
+        'HOST': 'localhost',
         'PORT': '5432'
     }
 }

@@ -105,7 +105,10 @@
                 }
             }else if(hout <= 12.00 || hin >= 13.00 ){
                 duration = hout - hin;
-            }else{
+            }else if(hout > 12.00 && hout < 13.00){
+                duration = 12.00 - hin; 
+            }
+            else{
                 duration = hout - hin - 1.00;
             }
 
