@@ -100,36 +100,6 @@
                 		</div>
                 	</center>
                 </div>
-                {% elif admin.is_staff and component == 'coastmap' %}
-                <strong><h1>Welcome, {{admin.username}}!</h1></strong>
-                <span><a href="/profile/"><button class="btn btn-warning">View my Records</button></span>
-                <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 btn-top">
-                	<h3>CoastMap</h3>
-                	<center>
-                		<div id="coastmap">
-                		</div>
-                	</center>
-                </div>
-                {% elif admin.is_staff and component == 'sra-yess' %}
-                <strong><h1>Welcome, {{admin.username}}!</h1></strong>
-                <span><a href="/profile/"><button class="btn btn-warning">View my Records</button></span>
-                <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 btn-top">
-                	<h3>SRA-YESS</h3>
-                	<center>
-                		<div id="sra-yess">
-                		</div>
-                	</center>
-                </div>
-                {% elif admin.is_staff and component == 'corva' %}
-                <strong><h1>Welcome, {{admin.username}}!</h1></strong>
-                <span><a href="/profile/"><button class="btn btn-warning">View my Records</button></span>
-                <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 btn-top">
-                	<h3>CoRVA</h3>
-                	<center>
-                		<div id="corva">
-                		</div>
-                	</center>
-                </div>
                 {% endif %}
         </div>
         <!--/col-span-9-->

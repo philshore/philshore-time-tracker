@@ -61,11 +61,12 @@ def admin_dashboard(request):
     timeInListToday = TimeIn.objects.filter(dateIn=dateToday)
     admin = User.objects.get(id=request.user.id)
     admin_component = UserComponent.objects.get(user_id=request.user.id)
+    print(admin_component.component)
     return render(request, 'profile/dashboard.html',
                   {'page_title': page_title,
                    'users': users,
                    'admin': admin,
-                   'component': admin_component.component,
+                   'component': admin_component,
                    'timeInList': timeInListToday,
                    'data_dict': data_dict,
                    })
