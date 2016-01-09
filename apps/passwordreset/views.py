@@ -7,20 +7,25 @@ from datetime import datetime
 
 # Create your views here.
 def password_reset(request):
-    page_title = 'Password Reset'
-    if request.method == 'GET':
-        return render(request, 'password_reset/login_reset.html' )
+    if request.user.is_active:
+        return redirect('/')
+    else:
+        page_title = 'Password Reset'
+        if request.method == 'GET':
+            return render(request, 'password_reset/login_reset.html' )
 
-    elif request.method == 'POST':
-        email = request.POST.get('email')
-        try:
-            user = User.objects.get(email=email)
-        except:
-            return HttpResponse('User not found.')
-        password = User.objects.make_random_password(length=16)
-        user.set_password(password)
-        sendResetEmail(email, password)
-        return HttpResponse('Password Reset Post')
+        elif request.method == 'POST':
+            email = request.POST.get('email')
+            try:
+                user = User.objects.get(email=email)
+            except:
+                return redirect('/')
+                # return HttpResponse('User not found.')
+            password = User.objects.make_random_password(length=16)
+            user.set_password(password)
+            # user.save()
+            sendResetEmail(email, password)
+            return render(request, 'password_reset/reset_success.html')
 
 
 def sendResetEmail(userEmail, new_pass):
