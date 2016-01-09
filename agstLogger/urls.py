@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^$', include('apps.login.urls')),
     url(r'^login/', include('apps.login.urls')),
     url(r'^profile/', include('apps.user_logs.urls')),
+    url(r'^reset/', include('apps.passwordreset.urls')),
 ]

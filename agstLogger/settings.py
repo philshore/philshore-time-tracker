@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'apps.register',
     'apps.login',
     'apps.user_logs',
+    'apps.passwordreset',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -111,3 +112,19 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/login/'
+
+
+# Email Credentials
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_USE_SSL = True
+
+EMAIL_HOST = 'smtp.gmail.com'
+
+EMAIL_HOST_USER = 'philshoreteam@gmail.com'
+
+EMAIL_HOST_PASSWORD = 't1d@LS3RveR'
+
+EMAIL_PORT = 465
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
