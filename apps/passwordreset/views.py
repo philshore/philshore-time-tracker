@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from datetime import datetime
 
@@ -8,7 +10,7 @@ from datetime import datetime
 # Create your views here.
 def password_reset(request):
     if request.user.is_active:
-        return redirect('/')
+        return redirect('/reset/change_password/')
     else:
         page_title = 'Password Reset'
         if request.method == 'GET':
@@ -26,6 +28,22 @@ def password_reset(request):
             # user.save()
             sendResetEmail(email, password)
             return render(request, 'password_reset/reset_success.html')
+
+
+@login_required
+def change_password(request):
+    if request.method == 'GET':
+        return render(request, 'password_reset/change_password.html')
+    elif request.method == 'POST':
+        new_pass = request.POST.get('new_password')
+        user = User.objects.get(id=request.user.id)
+        user.set_password(new_pass)
+        user.save()
+        username = user.username
+        userAuth = authenticate(username=username, password=new_pass)
+        if userAuth is not None:
+            login(request, userAuth)
+        return redirect('/reset/change_password/')
 
 
 def sendResetEmail(userEmail, new_pass):

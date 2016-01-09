@@ -58,13 +58,17 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-      </button>         
+      </button>
       <a class="navbar-brand" href="/profile/dashboard/"><span><img id="dash_logo" src="{% static "base/img/PhilSHORE Logo.png"  %}"/></span></a>
       <h3 class="white">PhilSHORE {{page_title}}</h3>
     </div>
     <div class="navbar-collapse collapse nav_admin">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><i class="fa fa-user"></i> {{user.username}}</a></li>
+        <li>  <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="fa fa-user"></i> {{user.username}}</a>
+				<ul id="g-account-menu" class="dropdown-menu" role="menu">
+					<li><a href="/reset/change_password/">Change Password</a></li>
+				</ul>
+			</li>
         <li><a href="/login/logout/"><i class="fa fa-lock"></i> Logout</a></li>
       </ul>
     </div>
@@ -89,9 +93,9 @@
         <div class="modal-content">
             <div class="modal-header">
             </div>
-            <div class="modal-body"> 
-                <h3>Are you sure you want to timeout?</h3> 
-                 <button class="btn btn-primary" style="margin-top:1.15em;" id="logOut">Time Out</button> 
+            <div class="modal-body">
+                <h3>Are you sure you want to timeout?</h3>
+                 <button class="btn btn-primary" style="margin-top:1.15em;" id="logOut">Time Out</button>
             </div>
             <div class="modal-footer">
                 <button data-dismiss="modal" class="btn btn-success" id="cancel">Cancel</button>
