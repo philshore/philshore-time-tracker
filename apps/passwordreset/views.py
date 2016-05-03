@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -12,9 +11,8 @@ def password_reset(request):
     if request.user.is_active:
         return redirect('/reset/change_password/')
     else:
-        page_title = 'Password Reset'
         if request.method == 'GET':
-            return render(request, 'password_reset/login_reset.html' )
+            return render(request, 'password_reset/login_reset.html')
 
         elif request.method == 'POST':
             email = request.POST.get('email')
@@ -25,7 +23,7 @@ def password_reset(request):
                 # return HttpResponse('User not found.')
             password = User.objects.make_random_password(length=16)
             user.set_password(password)
-            # user.save()
+            user.save()
             sendResetEmail(email, password)
             return render(request, 'password_reset/reset_success.html')
 
