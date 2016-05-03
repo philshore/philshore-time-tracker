@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.models import User
@@ -86,6 +85,7 @@ def admin_logs(request, user_id):
                    'timeOutList': timeOutlist,
                    'client': client,
                    })
+
 
 def ValuesQuerySetToDict(vqs, vqs2):
     """
