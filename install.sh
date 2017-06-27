@@ -35,4 +35,8 @@ pip install -r requirements.txt
 cd backups/
 psql -h localhost -U agstloggeruser -d agstloggerdb < dtrdb_backup_06_27_2017
 
+sudo mkdir -p /var/log/agstlogger
+sudo chmod -R 777 /var/log/agstlogger
+
+
 

@@ -9,3 +9,4 @@ apps/user_logs/migrations/
 .vagrant/
 backups/
 *.log
+agstlogger.ini
