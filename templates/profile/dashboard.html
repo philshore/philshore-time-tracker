@@ -62,71 +62,27 @@
                 <strong><h1>Welcome, {{admin.username}}!</h1></strong>
                 <span><a href="/profile/"><button class="btn btn-warning">View my Records</button></span>
                 <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 btn-top">
-                	<h3>SRA-YESS</h3>
+                    <h3>PhilSHORE</h3>
+                    <center>
+                        <div id="philshore">
+                        </div>
+                    </center>
+                </div>
+                <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 btn-top">
+                	<h3>REMAP</h3>
                 	<center>
-                		<div id="sra-yess">
+                		<div id="remap">
 
                 		</div>
                 	</center>
                 </div>
-                <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 btn-top">
-                	<h3>PARMap</h3>
-                	<center>
-                		<div id="parmap">
-                		</div>
-                	</center>
-                </div>
-                <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 btn-top">
-                	<h3>CoastMap</h3>
-                	<center>
-                		<div id="coastmap">
-                		</div>
-                	</center>
-                </div>
-                <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 btn-top">
-                	<h3>CoRVA</h3>
-                	<center>
-                		<div id="corva">
-                		</div>
-                	</center>
-                </div>
-                {% elif admin.is_staff and component == 'parmap' %}
+                {% elif admin.is_staff and component == 'remap' %}
                 <strong><h1>Welcome, {{admin.username}}!</h1></strong>
                 <span><a href="/profile/"><button class="btn btn-warning">View my Records</button></span>
                 <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 btn-top">
-                	<h3>PARMap</h3>
+                	<h3>REMap</h3>
                 	<center>
-                		<div id="parmap">
-                		</div>
-                	</center>
-                </div>
-                {% elif admin.is_staff and component == 'coastmap' %}
-                <strong><h1>Welcome, {{admin.username}}!</h1></strong>
-                <span><a href="/profile/"><button class="btn btn-warning">View my Records</button></span>
-                <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 btn-top">
-                	<h3>CoastMap</h3>
-                	<center>
-                		<div id="coastmap">
-                		</div>
-                	</center>
-                </div>
-                {% elif admin.is_staff and component == 'sra-yess' %}
-                <strong><h1>Welcome, {{admin.username}}!</h1></strong>
-                <span><a href="/profile/"><button class="btn btn-warning">View my Records</button></span>
-                <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 btn-top">
-                	<h3>SRA-YESS</h3>
-                	<center>
-                		<div id="sra-yess">
-                		</div>
-                	</center>
-                </div>
-                {% elif admin.is_staff and component == 'corva' %}
-                <strong><h1>Welcome, {{admin.username}}!</h1></strong>
-                <span><a href="/profile/"><button class="btn btn-warning">View my Records</button></span>
-                <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 btn-top">
-                	<h3>CoRVA</h3>
-                	<center>
-                		<div id="corva">
+                		<div id="remap">
                 		</div>
                 	</center>
                 </div>

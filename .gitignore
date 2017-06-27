@@ -1,7 +1,11 @@
 *.pyc
 *.swp
 venv/
+env/
 apps/login/migrations/
 apps/register/migrations/
 apps/user_logs/migrations/
 *.sqlite3
+.vagrant/
+backups/
+*.log

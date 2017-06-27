@@ -80,8 +80,12 @@ WSGI_APPLICATION = 'agstLogger.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR,'agstlogger.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'agstloggerdb',
+        'USER': 'agstloggeruser',
+        'PASSWORD': 'agstloggerpassword',
+        'HOST': '127.0.0.1',
+        'PORT': '5432'
     }
 }
 
