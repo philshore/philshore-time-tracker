@@ -6,7 +6,13 @@ Vagrant.configure("2") do |config|
 
   config.vm.synced_folder ".", "/home/ubuntu/src", create: true
 
-  config.vm.provision "shell", path: "install.sh"
+  # config.vm.provision "shell", path: "install.sh"
+  config.vm.provision "shell", inline: <<-SHELL
+    sudo locale-gen en_PH.UTF-8
+    cd src/
+    sh install.sh
+  SHELL
+
 
 end
 
