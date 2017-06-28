@@ -63,4 +63,4 @@ sh deploy.sh
 ```
 sh start.sh
 ```
-6. In your browser, access http://<ip-address>/
+6. In your browser, access `http://<ip-address>/`
